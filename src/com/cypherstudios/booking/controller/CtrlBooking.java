@@ -1,18 +1,30 @@
 package com.cypherstudios.booking.controller;
 
-import com.cypherstudios.booking.app.CypherBookingSystem;
-import com.cypherstudios.booking.view.BookingForm;
+import com.cypherstudios.booking.view.BookingDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 /**
+ * Clase controlador para el JDialog que se encarga de solicitar los datos
+ * necesarios para realizar la reserva.
+ *
+ * <ul><strong>Atributos de la Class HEREDADOS:</strong>
+ * <li>ArrayList de Objetos "Reserva" donde se almacenaran las reservas
+ * realizadas</li>
+ * <li>appInit: Instancia de la clase JFrame Init</li>
+ * </ul>
+ *
+ * <ul><strong>Atributos de la Class PROPIOS:</strong>
+ * <li>bookingWindow: instancia del JDialog BookingDialog</li>
+ * <li>Objeto Reserva --> Todos los necesarios para compeltar la reserva</li>
+ * </ul>
  *
  * @author Victor
  */
-public class CtrlBooking implements ActionListener {
+public class CtrlBooking extends CtrlInit implements ActionListener {
 
-    private final BookingForm bookingWindow = new BookingForm();
+    private final BookingDialog bookingWindow = new BookingDialog(appInit, true);
 
     public CtrlBooking() {
         /* Listener para opciones de menú */
@@ -26,13 +38,19 @@ public class CtrlBooking implements ActionListener {
         this.bookingWindow.btnReturn.addActionListener(this);
     }
 
+    /**
+     * Lanza la ventana de dialogo
+     */
     public void runBooking() {
         bookingWindow.setVisible(true);
-
-        bookingWindow.setTitle("Reserva de espacio");
-        bookingWindow.setLocationRelativeTo(null);
     }
 
+    /**
+     * Sobreescribe el método actionPerformed con el código que interesa para el
+     * JDialog donde se piden datos para realizar la reserva, de la clase padre
+     * CtrlInit de la que hereda, que a su vez sobreescribe el método de la
+     * clase abstracta que implementa
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         /* Acciones para botones y opciones de menú */
@@ -41,9 +59,8 @@ public class CtrlBooking implements ActionListener {
             System.exit(0);
         }
         if (e.getSource() == bookingWindow.btnReturn || e.getSource() == bookingWindow.navItemReturn) {
-            bookingWindow.dispose();
-
-            CypherBookingSystem.goBooking.appRun();
+            //Cierra el JDialog y vuelve a al JFrame principal
+            this.bookingWindow.setVisible(false);
         }
         if (e.getSource() == bookingWindow.btnSaveBooking || e.getSource() == bookingWindow.navItemSaveBooking) {
             JOptionPane.showMessageDialog(null, "Código no implementado todavía", "Reserva de espacio", JOptionPane.INFORMATION_MESSAGE);

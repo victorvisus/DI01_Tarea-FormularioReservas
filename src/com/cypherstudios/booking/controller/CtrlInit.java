@@ -1,5 +1,6 @@
 package com.cypherstudios.booking.controller;
 
+import com.cypherstudios.booking.view.BookingDialog;
 import com.cypherstudios.booking.view.Init;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +12,7 @@ import javax.swing.JOptionPane;
  */
 public class CtrlInit implements ActionListener {
 
-    private final Init appInit = new Init();
+    protected final Init appInit = new Init();
 
     /**
      * Constructor "vacio" de la clase, en el cual se inician las "escuchas" a
@@ -40,8 +41,8 @@ public class CtrlInit implements ActionListener {
     }
 
     /**
-     * Sobreescribe el método actionPerformed de la clase abstacta que
-     * implementa
+     * Sobreescribe el método actionPerformed, de la clase abstacta que
+     * implementa, con el código que interesa para el JFrame de la app
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -52,23 +53,18 @@ public class CtrlInit implements ActionListener {
         }
         // Inicia el sistema de booking
         if (e.getSource() == appInit.btnBooking || e.getSource() == appInit.navItemBooking) {
-            //Crea una instancia del controller CtrlBooking
+            //Crea una instancia del controller del JDialog de reservas: CtrlBooking
             CtrlBooking openBooking = new CtrlBooking();
-
-            appInit.dispose(); //Oculta el JFrame de inicio
-            //Iniciar el JFrame Booking
+            //Lanza el JDialog
             openBooking.runBooking();
 
         }
         // Abre el panel donde se listan las reservas "guardadas"
         if (e.getSource() == appInit.btnBookingList || e.getSource() == appInit.navItemBookingList) {
             //Crea una instancia del controller CtrflBookingList
-            /* Aqui el código */
-
-            //appInit.dispose(); //Oculta el JFrame de inicio
-            //Iniciar el JFrame BookingList
-            /* Aqui el código */
-            JOptionPane.showMessageDialog(null, "Código no implementado todavía", "Reserva de espacio", JOptionPane.INFORMATION_MESSAGE);
+            CtrlBookingList openList = new CtrlBookingList();
+            //Iniciar el JDialog BookingList
+            openList.runListWindow();
         }
     }
 
