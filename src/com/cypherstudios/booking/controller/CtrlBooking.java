@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * <ul><strong>Atributos de la Class PROPIOS:</strong>
  * <li>bookingWindow: instancia del JDialog BookingDialog</li>
- * <li>Objeto Reserva --> Todos los necesarios para compeltar la reserva</li>
+ * <li>Objeto Reserva --> Todos los necesarios para completar la reserva</li>
  * </ul>
  *
  * @author Victor
@@ -64,9 +64,23 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
         }
         if (e.getSource() == bookingWindow.btnSaveBooking || e.getSource() == bookingWindow.navItemSaveBooking) {
             JOptionPane.showMessageDialog(null, "Código no implementado todavía", "Reserva de espacio", JOptionPane.INFORMATION_MESSAGE);
+            /*
+            Booking reservation = null;
+
+            Llama al método que recogerá todos los datos del formulario y creará
+            el objeto reservation, que luego añadirá al ArrayList
+
+
+            publicBookingList.add(booking);
+             */
         }
         if (e.getSource() == bookingWindow.navItemBookingList) {
-            JOptionPane.showMessageDialog(null, "Código no implementado todavía", "Reserva de espacio", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Código no implementado todavía", "Reserva de espacio", JOptionPane.INFORMATION_MESSAGE);
+
+            //Crea una instancia del controller CtrflBookingList
+            CtrlBookingList openList = new CtrlBookingList();
+            //Iniciar el JDialog BookingList
+            openList.runListWindow();
         }
     }
 

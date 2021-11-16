@@ -36,7 +36,6 @@ public class Init extends javax.swing.JFrame {
         btnBooking = new javax.swing.JButton();
         btnBookingList = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
-        imgDecor = new javax.swing.JLabel();
         navBar = new javax.swing.JMenuBar();
         navItem = new javax.swing.JMenu();
         navItemBooking = new javax.swing.JMenuItem();
@@ -44,10 +43,10 @@ public class Init extends javax.swing.JFrame {
         navItemExit = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelOptions.setBackground(new java.awt.Color(255, 255, 255));
+        panelOptions.setBackground(new java.awt.Color(153, 153, 153));
         panelOptions.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(153, 153, 153)));
-        panelOptions.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnBooking.setText("Hacer Reserva");
         btnBooking.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -56,7 +55,6 @@ public class Init extends javax.swing.JFrame {
                 btnBookingActionPerformed(evt);
             }
         });
-        panelOptions.add(btnBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 157, -1));
 
         btnBookingList.setText("Ver Reservas");
         btnBookingList.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -65,7 +63,29 @@ public class Init extends javax.swing.JFrame {
                 btnBookingListActionPerformed(evt);
             }
         });
-        panelOptions.add(btnBookingList, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 157, -1));
+
+        javax.swing.GroupLayout panelOptionsLayout = new javax.swing.GroupLayout(panelOptions);
+        panelOptions.setLayout(panelOptionsLayout);
+        panelOptionsLayout.setHorizontalGroup(
+            panelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelOptionsLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(panelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBookingList, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        panelOptionsLayout.setVerticalGroup(
+            panelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelOptionsLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(btnBooking)
+                .addGap(46, 46, 46)
+                .addComponent(btnBookingList)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(panelOptions, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 26, -1, -1));
 
         btnExit.setBackground(new java.awt.Color(0, 102, 255));
         btnExit.setForeground(new java.awt.Color(255, 255, 255));
@@ -77,11 +97,7 @@ public class Init extends javax.swing.JFrame {
                 btnExitActionPerformed(evt);
             }
         });
-        panelOptions.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 540, 180, 40));
-
-        imgDecor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/cypherstudios/booking/resources/LaRinconada-Local-041719-010.jpg"))); // NOI18N
-        imgDecor.setToolTipText("");
-        panelOptions.add(imgDecor, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, 250, 600));
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 201, 218, 40));
 
         navItem.setText("Archivo");
         navItem.setToolTipText("");
@@ -99,33 +115,20 @@ public class Init extends javax.swing.JFrame {
 
         setJMenuBar(navBar);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelOptions, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(panelOptions, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookingActionPerformed
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnBookingActionPerformed
+    }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnBookingListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookingListActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBookingListActionPerformed
 
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+    private void btnBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookingActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnExitActionPerformed
+    }//GEN-LAST:event_btnBookingActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -167,7 +170,6 @@ public class Init extends javax.swing.JFrame {
     public javax.swing.JButton btnBooking;
     public javax.swing.JButton btnBookingList;
     public javax.swing.JButton btnExit;
-    private javax.swing.JLabel imgDecor;
     public javax.swing.JMenuBar navBar;
     public javax.swing.JMenu navItem;
     public javax.swing.JMenuItem navItemBooking;

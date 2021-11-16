@@ -1,10 +1,10 @@
 package com.cypherstudios.booking.controller;
 
-import com.cypherstudios.booking.view.BookingDialog;
+import com.cypherstudios.booking.model.Booking;
 import com.cypherstudios.booking.view.Init;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 public class CtrlInit implements ActionListener {
 
     protected final Init appInit = new Init();
+
+    protected static ArrayList<Booking> publicBookingList = new ArrayList();
 
     /**
      * Constructor "vacio" de la clase, en el cual se inician las "escuchas" a
@@ -28,6 +30,7 @@ public class CtrlInit implements ActionListener {
         this.appInit.btnBooking.addActionListener(this);
         this.appInit.btnBookingList.addActionListener(this);
         this.appInit.btnExit.addActionListener(this);
+
     }
 
     /**
