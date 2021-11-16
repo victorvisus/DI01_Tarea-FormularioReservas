@@ -1,6 +1,8 @@
 package com.cypherstudios.booking.model;
 
+import com.cypherstudios.booking.exceptions.BookingExceptions;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -8,24 +10,49 @@ import java.util.Date;
  */
 public class Meeting extends Booking {
 
-    private final String eventType = "Banquete";
+    private final String eventType = "Congreso";
 
     private int days;
-    private char hostel; //valores 'Y' para si, 'N' para no
-    private HostelBooking rooms;
+    private char hosting; //valores 'Y' para si, 'N' para no
+    private HostingRoom rooms;
 
     /* Constructores */
+    /**
+     * Constructor de la clase
+     *
+     * Llama al constructor de la clase padre Booking, pasándole los atributos
+     * necesarios, además de asignar los valores a los atributos propios de la
+     * clase, evaluando si este tipo de clase precisa de alojamiento (hosting) o
+     * no, en caso afirmativo (hosting == 'Y') instancia el objeto que almacena
+     * los datos del alojamiento, enviándole a través de su constructor los
+     * atributos para ello.
+     *
+     * @param reservation
+     * @param attendees
+     * @param typeCuisine
+     * @param days
+     * @param hosting
+     * @param numDays
+     * @param numRooms
+     */
     public Meeting(Date reservation, int attendees, String typeCuisine,
-            int days, char hostel, int numDays, int numRooms) {
+            int days, char hosting, int numDays, int numRooms) {
         super(reservation, attendees, typeCuisine);
 
         this.days = days;
-        this.hostel = hostel;
+        this.hosting = hosting;
 
-        if (hostel == 'Y') {
-            HostelBooking rooms = new HostelBooking(numDays, numRooms);
+        if (hosting == 'Y') {
+            try {
+                HostingRoom.evaluateData(numDays, numRooms); // Evalua que tenemos los datos
 
-            this.rooms = rooms;
+                HostingRoom rooms = new HostingRoom(numDays, numRooms);
+
+                this.rooms = rooms;
+            } catch (BookingExceptions ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(),
+                        "Error al establecer la puntuación", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
@@ -42,19 +69,19 @@ public class Meeting extends Booking {
         this.days = days;
     }
 
-    public char getHostel() {
-        return hostel;
+    public char getHosting() {
+        return hosting;
     }
 
-    public void setHostel(char hostel) {
-        this.hostel = hostel;
+    public void setHosting(char hosting) {
+        this.hosting = hosting;
     }
 
     @Override
     public String toString() {
         return super.toString() + "\nTipo de Evento: " + eventType
                 + "\nNº de Jornadas: " + days
-                + "\n¿Necesita hotel? " + hostel;
+                + "\n¿Necesita hotel? " + hosting;
     }
 
     @Override

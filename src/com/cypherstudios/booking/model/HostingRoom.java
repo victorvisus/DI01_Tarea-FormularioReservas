@@ -1,16 +1,19 @@
 package com.cypherstudios.booking.model;
 
+import com.cypherstudios.booking.exceptions.BookingExceptions;
+
 /**
  *
  * @author Victor
  */
-class HostelBooking {
+class HostingRoom {
 
     private int numDays;
     private int numRooms;
 
     /* Constructores */
-    public HostelBooking(int numDays, int numRooms) {
+    public HostingRoom(int numDays, int numRooms) {
+
         this.numDays = numDays;
         this.numRooms = numRooms;
     }
@@ -40,5 +43,9 @@ class HostelBooking {
                 + "\nNº de habitaciones: " + numRooms;
     }
 
-
+    public static void evaluateData(int numDays, int numRooms) throws BookingExceptions {
+        if (numDays == 0 || numRooms == 0) {
+            throw new BookingExceptions(1);
+        }
+    }
 }
