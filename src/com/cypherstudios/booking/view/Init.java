@@ -43,10 +43,11 @@ public class Init extends javax.swing.JFrame {
         navItemExit = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setResizable(false);
 
-        panelOptions.setBackground(new java.awt.Color(153, 153, 153));
+        panelOptions.setBackground(new java.awt.Color(255, 255, 255));
         panelOptions.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(153, 153, 153)));
+        panelOptions.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnBooking.setText("Hacer Reserva");
         btnBooking.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -55,6 +56,7 @@ public class Init extends javax.swing.JFrame {
                 btnBookingActionPerformed(evt);
             }
         });
+        panelOptions.add(btnBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 157, -1));
 
         btnBookingList.setText("Ver Reservas");
         btnBookingList.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -63,29 +65,7 @@ public class Init extends javax.swing.JFrame {
                 btnBookingListActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout panelOptionsLayout = new javax.swing.GroupLayout(panelOptions);
-        panelOptions.setLayout(panelOptionsLayout);
-        panelOptionsLayout.setHorizontalGroup(
-            panelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelOptionsLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(panelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBookingList, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-        panelOptionsLayout.setVerticalGroup(
-            panelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelOptionsLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(btnBooking)
-                .addGap(46, 46, 46)
-                .addComponent(btnBookingList)
-                .addContainerGap(31, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(panelOptions, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 26, -1, -1));
+        panelOptions.add(btnBookingList, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 157, -1));
 
         btnExit.setBackground(new java.awt.Color(0, 102, 255));
         btnExit.setForeground(new java.awt.Color(255, 255, 255));
@@ -97,23 +77,66 @@ public class Init extends javax.swing.JFrame {
                 btnExitActionPerformed(evt);
             }
         });
-        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 201, 218, 40));
 
+        navBar.setBackground(new java.awt.Color(102, 0, 102));
+        navBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        navBar.setForeground(new java.awt.Color(255, 255, 255));
+        navBar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+
+        navItem.setBackground(navBar.getBackground());
+        navItem.setBorder(navBar.getBorder());
+        navItem.setForeground(navBar.getForeground());
         navItem.setText("Archivo");
         navItem.setToolTipText("");
+        navItem.setFont(navBar.getFont());
 
+        navItemBooking.setBackground(navBar.getBackground());
+        navItemBooking.setFont(navItem.getFont());
+        navItemBooking.setForeground(navBar.getForeground());
         navItemBooking.setText("Reservar");
+        navItemBooking.setBorder(navItem.getBorder());
         navItem.add(navItemBooking);
+        navItemBooking.getAccessibleContext().setAccessibleParent(navItem);
 
+        navItemBookingList.setBackground(navBar.getBackground());
+        navItemBookingList.setFont(navItem.getFont());
+        navItemBookingList.setForeground(navBar.getForeground());
         navItemBookingList.setText("Ver Reservas");
+        navItemBookingList.setBorder(navItem.getBorder());
         navItem.add(navItemBookingList);
+        navItemBookingList.getAccessibleContext().setAccessibleParent(navItem);
 
+        navItemExit.setBackground(navBar.getBackground());
+        navItemExit.setFont(navItem.getFont());
+        navItemExit.setForeground(navBar.getForeground());
         navItemExit.setText("Salir");
+        navItemExit.setBorder(navItem.getBorder());
         navItem.add(navItemExit);
+        navItemExit.getAccessibleContext().setAccessibleParent(navItem);
 
         navBar.add(navItem);
 
         setJMenuBar(navBar);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelOptions, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(panelOptions, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
