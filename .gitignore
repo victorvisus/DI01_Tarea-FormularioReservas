@@ -25,3 +25,6 @@ hs_err_pid*
 
 # Temporario Files
 .~lock.*
+
+#
+nbproject/private/private.xml
