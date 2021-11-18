@@ -94,8 +94,8 @@ public class BookingDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 0, 102));
         jLabel1.setText("Introduce los datos de la reserva");
 
         lbDateReservation.setText("Fecha del evento");
@@ -107,6 +107,7 @@ public class BookingDialog extends javax.swing.JDialog {
         lbTypeCuisine.setText("Tipo de Cocina");
 
         cbEventType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Banquete", "Jornada", "Congreso" }));
+        cbEventType.setToolTipText("Elije el tipo de evento");
         cbEventType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbEventTypeActionPerformed(evt);
@@ -114,25 +115,32 @@ public class BookingDialog extends javax.swing.JDialog {
         });
 
         attendees.setModel(new javax.swing.SpinnerNumberModel(5, 5, 120, 1));
+        attendees.setToolTipText("Dinos los asistentes al evento");
 
         cbTypeCuisine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bufet", "Pedir cita con el chef", "No precisa" }));
+        cbTypeCuisine.setToolTipText("Elije el tipo de menú");
 
         dateReservation.setModel(new javax.swing.SpinnerDateModel());
+        dateReservation.setToolTipText("Indica la fecha del evento");
         dateReservation.setEditor(new javax.swing.JSpinner.DateEditor(dateReservation, "dd-MM- yyyy"));
 
         panelHostingRooms.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Reserva de Habitaciones"));
         panelHostingRooms.setEnabled(false);
 
         lbNumDays.setText("Nº de Días");
+        lbNumDays.setToolTipText("Indica el número de dias");
         lbNumDays.setEnabled(false);
 
         lbNumRooms.setText("Nº de Habitaciones");
+        lbNumRooms.setToolTipText("¿Cuántas habitaciones?");
         lbNumRooms.setEnabled(false);
 
         numDays.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        numDays.setToolTipText("Indica el número de dias");
         numDays.setEnabled(false);
 
         numRooms.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        numRooms.setToolTipText("¿Cuántas habitaciones?");
         numRooms.setEnabled(false);
 
         javax.swing.GroupLayout panelHostingRoomsLayout = new javax.swing.GroupLayout(panelHostingRooms);
@@ -165,6 +173,7 @@ public class BookingDialog extends javax.swing.JDialog {
         );
 
         rbtnHostingYes.setText("Si");
+        rbtnHostingYes.setToolTipText("¿Necesitas alojamiento?");
         rbtnHostingYes.setEnabled(false);
         rbtnHostingYes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,9 +182,11 @@ public class BookingDialog extends javax.swing.JDialog {
         });
 
         lbHosrting.setText("Alojamiento");
+        lbHosrting.setToolTipText("¿Necesitas alojamiento?");
         lbHosrting.setEnabled(false);
 
         rbtnHostingNo.setText("No");
+        rbtnHostingNo.setToolTipText("¿Necesitas alojamiento?");
         rbtnHostingNo.setEnabled(false);
         rbtnHostingNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,11 +252,11 @@ public class BookingDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panelHostingRooms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                         .addComponent(btnSaveBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43))
+                        .addGap(49, 49, 49))
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,12 +270,11 @@ public class BookingDialog extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lbEventType)
                                 .addGap(58, 58, 58)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cbEventType, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cbTypeCuisine, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(dateReservation)))
-                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbTypeCuisine, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dateReservation)
+                            .addComponent(cbEventType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(87, 87, 87)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbAttendees)
                             .addComponent(lbHosrting))
@@ -300,7 +310,7 @@ public class BookingDialog extends javax.swing.JDialog {
                     .addComponent(dateReservation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbAttendees)
                     .addComponent(attendees, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)

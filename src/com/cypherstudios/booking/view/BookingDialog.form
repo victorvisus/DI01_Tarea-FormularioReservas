@@ -176,11 +176,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="panelHostingRooms" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="81" max="32767" attributes="0"/>
+                      <EmptySpace pref="75" max="32767" attributes="0"/>
                       <Component id="btnSaveBooking" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnReturn" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
@@ -200,14 +200,12 @@
                               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="cbEventType" alignment="0" min="-2" pref="182" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="cbTypeCuisine" max="32767" attributes="0"/>
-                              <Component id="dateReservation" max="32767" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="cbTypeCuisine" max="32767" attributes="0"/>
+                          <Component id="dateReservation" max="32767" attributes="0"/>
+                          <Component id="cbEventType" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lbAttendees" min="-2" max="-2" attributes="0"/>
                           <Component id="lbHosrting" min="-2" max="-2" attributes="0"/>
@@ -254,7 +252,7 @@
                   <Component id="lbAttendees" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="attendees" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="49" max="32767" attributes="0"/>
+              <EmptySpace pref="51" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                       <Component id="btnReturn" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -330,10 +328,10 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="18" style="0"/>
+          <Font name="Roboto" size="18" style="0"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
+          <Color blue="66" green="0" red="66" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Introduce los datos de la reserva"/>
       </Properties>
@@ -367,6 +365,7 @@
             <StringItem index="2" value="Congreso"/>
           </StringArray>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Elije el tipo de evento"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEventTypeActionPerformed"/>
@@ -381,6 +380,7 @@
         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
           <SpinnerModel initial="5" maximum="120" minimum="5" numberType="java.lang.Integer" stepSize="1" type="number"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Dinos los asistentes al evento"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -395,6 +395,7 @@
             <StringItem index="2" value="No precisa"/>
           </StringArray>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Elije el tipo de men&#xfa;"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -406,6 +407,7 @@
         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
           <SpinnerModel initial="now" stepSize="5" type="date"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Indica la fecha del evento"/>
         <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
           <SpinnerEditor format="dd-MM- yyyy" type="1"/>
         </Property>
@@ -468,12 +470,14 @@
         <Component class="javax.swing.JLabel" name="lbNumDays">
           <Properties>
             <Property name="text" type="java.lang.String" value="N&#xba; de D&#xed;as"/>
+            <Property name="toolTipText" type="java.lang.String" value="Indica el n&#xfa;mero de dias"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbNumRooms">
           <Properties>
             <Property name="text" type="java.lang.String" value="N&#xba; de Habitaciones"/>
+            <Property name="toolTipText" type="java.lang.String" value="&#xbf;Cu&#xe1;ntas habitaciones?"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
@@ -482,6 +486,7 @@
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Indica el n&#xfa;mero de dias"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
@@ -493,6 +498,7 @@
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="&#xbf;Cu&#xe1;ntas habitaciones?"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
@@ -504,6 +510,7 @@
     <Component class="javax.swing.JRadioButton" name="rbtnHostingYes">
       <Properties>
         <Property name="text" type="java.lang.String" value="Si"/>
+        <Property name="toolTipText" type="java.lang.String" value="&#xbf;Necesitas alojamiento?"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -516,12 +523,14 @@
     <Component class="javax.swing.JLabel" name="lbHosrting">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alojamiento"/>
+        <Property name="toolTipText" type="java.lang.String" value="&#xbf;Necesitas alojamiento?"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbtnHostingNo">
       <Properties>
         <Property name="text" type="java.lang.String" value="No"/>
+        <Property name="toolTipText" type="java.lang.String" value="&#xbf;Necesitas alojamiento?"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
