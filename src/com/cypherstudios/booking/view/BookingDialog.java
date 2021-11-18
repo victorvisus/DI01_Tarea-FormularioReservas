@@ -117,7 +117,8 @@ public class BookingDialog extends javax.swing.JDialog {
 
         cbTypeCuisine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bufet", "Pedir cita con el chef", "No precisa" }));
 
-        dateReservation.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(), null, java.util.Calendar.DAY_OF_MONTH));
+        dateReservation.setModel(new javax.swing.SpinnerDateModel());
+        dateReservation.setEditor(new javax.swing.JSpinner.DateEditor(dateReservation, "dd-MM- yyyy"));
 
         panelHostingRooms.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Reserva de Habitaciones"));
         panelHostingRooms.setEnabled(false);
