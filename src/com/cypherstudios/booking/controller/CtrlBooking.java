@@ -97,6 +97,9 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
         }
     }
 
+    //MÉTODO PARA EXTRAER LOS DVALORES DEL FORMULARIOÇ
+    //Spinner --> http://amanuva.blogspot.com/2016/02/010-uso-de-spinner-java-y-netbeans.html
+    //Spinner Date --> https://es.stackoverflow.com/questions/213746/como-sacar-un-localdate-de-un-jspinner-que-tiene-un-date
     /**
      * Valida el formulario de registro. Llama a los distintos métodos y les
      * pasa los datos necesarios para cada una de las validaciones
