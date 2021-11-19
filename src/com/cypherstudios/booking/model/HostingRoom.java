@@ -6,14 +6,16 @@ import com.cypherstudios.booking.exceptions.BookingExceptions;
  *
  * @author Victor
  */
-class HostingRoom {
+public class HostingRoom {
 
     private int numDays;
     private int numRooms;
 
     /* Constructores */
-    public HostingRoom(int numDays, int numRooms) {
+    public HostingRoom() {
+    }
 
+    public HostingRoom(int numDays, int numRooms) {
         this.numDays = numDays;
         this.numRooms = numRooms;
     }

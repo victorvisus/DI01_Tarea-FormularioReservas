@@ -44,7 +44,6 @@ public class appIni extends javax.swing.JFrame {
         btnExit = new javax.swing.JButton();
         pnlHeader = new javax.swing.JPanel();
         exitTxt = new javax.swing.JLabel();
-        navItemBooking = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -63,6 +62,8 @@ public class appIni extends javax.swing.JFrame {
         btnBookingList.setText("Ver Eventos");
         btnBookingList.setToolTipText("Lista los eventos contratados");
         btnBookingList.setBorder(btnExit.getBorder());
+        btnBookingList.setBorderPainted(false);
+        btnBookingList.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnBookingList.setNextFocusableComponent(btnExit);
         panelBackground.add(btnBookingList, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 160, -1));
         btnBookingList.getAccessibleContext().setAccessibleParent(this);
@@ -73,6 +74,8 @@ public class appIni extends javax.swing.JFrame {
         btnBooking.setText("Reservar Evento");
         btnBooking.setToolTipText("Reservar Evento");
         btnBooking.setBorder(btnExit.getBorder());
+        btnBooking.setBorderPainted(false);
+        btnBooking.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnBooking.setNextFocusableComponent(btnBookingList);
         panelBackground.add(btnBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
         btnBooking.getAccessibleContext().setAccessibleParent(this);
@@ -154,9 +157,6 @@ public class appIni extends javax.swing.JFrame {
         });
         pnlHeader.add(exitTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(503, 0, -1, -1));
 
-        navItemBooking.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        navItemBooking.setText("jLabel1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,9 +174,7 @@ public class appIni extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(formDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(navItemBooking)
-                                            .addComponent(formTittle))
+                                        .addComponent(formTittle)
                                         .addGap(0, 0, Short.MAX_VALUE)))))
                         .addGap(48, 48, 48))
                     .addComponent(pnlHeader, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -188,9 +186,7 @@ public class appIni extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
-                .addComponent(navItemBooking)
-                .addGap(36, 36, 36)
+                .addGap(118, 118, 118)
                 .addComponent(formTittle)
                 .addGap(18, 18, 18)
                 .addComponent(formDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -292,7 +288,6 @@ public class appIni extends javax.swing.JFrame {
     private javax.swing.JLabel menuLeft;
     private javax.swing.JLabel nameBooking;
     private javax.swing.JLabel nameEvent;
-    public javax.swing.JLabel navItemBooking;
     private javax.swing.JPanel panelBackground;
     public javax.swing.JPanel pnlHeader;
     // End of variables declaration//GEN-END:variables

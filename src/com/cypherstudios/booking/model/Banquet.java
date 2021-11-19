@@ -10,6 +10,10 @@ public class Banquet extends Booking {
 
     private final String eventType = "Banquete";
 
+    public Banquet() {
+        super();
+    }
+
     public Banquet(Date reservation, int attendees, String typeCuisine) {
         super(reservation, attendees, typeCuisine);
     }

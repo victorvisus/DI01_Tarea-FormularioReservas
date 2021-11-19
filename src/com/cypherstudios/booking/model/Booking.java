@@ -10,13 +10,16 @@ import java.util.Date;
  */
 public abstract class Booking implements Comparable<Booking> {
 
-    public static final String[] cuisine = new String[]{"Bufé", "Carta", "Pedir cita con el chef", "No precisa"};
+    //public static final String[] cuisine = new String[]{"Bufé", "Carta", "Pedir cita con el chef", "No precisa"};
 
-    private Date reservation;
-    private int attendees;
-    private String typeCuisine;
+    protected Date reservation;
+    protected int attendees;
+    protected String typeCuisine;
 
     /* Constructores */
+    public Booking() {
+    }
+
     public Booking(Date reservation, int attendees, String typeCuisine) {
         this.reservation = reservation;
         this.attendees = attendees;

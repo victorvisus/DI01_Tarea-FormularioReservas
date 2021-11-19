@@ -10,6 +10,10 @@ public class Workshop extends Booking {
 
     private final String eventType = "Jornada";
 
+    public Workshop() {
+        super();
+    }
+
     public Workshop(Date reservation, int attendees, String typeCuisine) {
         super(reservation, attendees, typeCuisine);
     }

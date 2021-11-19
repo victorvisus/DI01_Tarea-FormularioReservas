@@ -17,6 +17,10 @@ public class Meeting extends Booking {
     private HostingRoom rooms;
 
     /* Constructores */
+    public Meeting() {
+        super();
+    }
+
     /**
      * Constructor de la clase
      *
@@ -35,8 +39,7 @@ public class Meeting extends Booking {
      * @param numDays
      * @param numRooms
      */
-    public Meeting(Date reservation, int attendees, String typeCuisine,
-            int days, char hosting, int numDays, int numRooms) {
+    public Meeting(Date reservation, int attendees, String typeCuisine, int days, char hosting, int numDays, int numRooms) {
         super(reservation, attendees, typeCuisine);
 
         this.days = days;

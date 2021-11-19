@@ -1,11 +1,12 @@
 package com.cypherstudios.booking.controller;
 
 import com.cypherstudios.booking.exceptions.BookingExceptions;
-import com.cypherstudios.booking.model.Booking;
+import com.cypherstudios.booking.model.*;
 import com.cypherstudios.booking.view.BookingDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -69,6 +70,7 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
         if (e.getSource() == bookingWindow.btnSaveBooking || e.getSource() == bookingWindow.navItemSaveBooking) {
             JOptionPane.showMessageDialog(null, "Código no implementado todavía", "Reserva de espacio", JOptionPane.INFORMATION_MESSAGE);
 
+            //1º Valida el formulairo
             Booking reservation = null;
 
             /*
@@ -83,9 +85,9 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
             y crear el objeto HostingRoom para añadirlo como atributo del objeto Meeting
             3. Crea el objeto correspondiente y lo devuelve, para añadirlo al ArraList
              */
-            //publicBookingList.add(reservation);
+            publicBookingList.add(actionBtnSaveBooking(reservation));
             //Una vez hecha la reserva que limie el formulario
-            //Ver metodo limpiaForm
+            limpiaForm();
         }
         if (e.getSource() == bookingWindow.navItemBookingList) {
             //JOptionPane.showMessageDialog(null, "Código no implementado todavía", "Reserva de espacio", JOptionPane.INFORMATION_MESSAGE);
@@ -100,6 +102,34 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
     //MÉTODO PARA EXTRAER LOS DVALORES DEL FORMULARIOÇ
     //Spinner --> http://amanuva.blogspot.com/2016/02/010-uso-de-spinner-java-y-netbeans.html
     //Spinner Date --> https://es.stackoverflow.com/questions/213746/como-sacar-un-localdate-de-un-jspinner-que-tiene-un-date
+    private Booking actionBtnSaveBooking(Booking reservation) {
+
+        bookingWindow.attendees.getValue();
+
+        //Manda a comprobar que el tipo de reserva sea "Congreso"
+        if (dataEvaluate(bookingWindow.cbEventType, "Congreso")) {
+            reservation = new Meeting();
+
+            HostingRoom h = new HostingRoom();
+            h.setNumDays((int) bookingWindow.numDays.getValue());
+            h.setNumDays((int) bookingWindow.numRooms.getValue());
+
+        };
+
+        //Añade valores a los atributos del objeto
+        return reservation;
+    }
+
+    private boolean dataEvaluate(JComboBox cb, String evType) {
+        String tipo = (String) cb.getSelectedItem();
+
+        if (tipo == evType) {
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * Valida el formulario de registro. Llama a los distintos métodos y les
      * pasa los datos necesarios para cada una de las validaciones
@@ -132,7 +162,7 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
         validaciones.valCamposNull(campos);
     }
      */
-    /*
+ /*
         private void limpiaForm() {
         bookingWindow.txtNickName.setText(null);
         bookingWindow.txtEmail.setText(null);
@@ -164,5 +194,10 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
             }
         }
 
+    }
+
+    private void limpiaForm() {
+        JOptionPane.showMessageDialog(null, "Código no implementado todavía, tiene que limpiar el formulario",
+                "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
     }
 }

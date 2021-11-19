@@ -49,26 +49,26 @@ public class CtrlInit implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-//        /* Acciones para botones y opciones de menú */
-//        if (e.getSource() == appInit.btnExit || e.getSource() == appInit.navItemExit) {
-//            //Cierra la aplicación
-//            System.exit(0);
-//        }
-//        // Inicia el sistema de booking
-//        if (e.getSource() == appInit.btnBooking || e.getSource() == appInit.navItemBooking) {
-//            //Crea una instancia del controller del JDialog de reservas: CtrlBooking
-//            CtrlBooking openBooking = new CtrlBooking();
-//            //Lanza el JDialog
-//            openBooking.runBooking();
-//
-//        }
-//        // Abre el panel donde se listan las reservas "guardadas"
-//        if (e.getSource() == appInit.btnBookingList || e.getSource() == appInit.navItemBookingList) {
-//            //Crea una instancia del controller CtrflBookingList
-//            CtrlBookingList openList = new CtrlBookingList();
-//            //Iniciar el JDialog BookingList
-//            openList.runListWindow();
-//        }
+        /* Acciones para botones y opciones de menú */
+        if (e.getSource() == appInit.btnExit) {
+            //Cierra la aplicación
+            System.exit(0);
+        }
+        // Inicia el sistema de booking
+        if (e.getSource() == appInit.btnBooking) {
+            //Crea una instancia del controller del JDialog de reservas: CtrlBooking
+            CtrlBooking openBooking = new CtrlBooking();
+            //Lanza el JDialog
+            openBooking.runBooking();
+
+        }
+        // Abre el panel donde se listan las reservas "guardadas"
+        if (e.getSource() == appInit.btnBookingList) {
+            //Crea una instancia del controller CtrflBookingList
+            CtrlBookingList openList = new CtrlBookingList();
+            //Iniciar el JDialog BookingList
+            openList.runListWindow();
+        }
     }
 
 }
