@@ -45,7 +45,7 @@ public class HostingRoom {
                 + "\nNº de habitaciones: " + numRooms;
     }
 
-    public static void evaluateData(int numDays, int numRooms) throws BookingExceptions {
+    public static void evaluateRoomsData(int numDays, int numRooms) throws BookingExceptions {
         if (numDays == 0 || numRooms == 0) {
             throw new BookingExceptions(1);
         }

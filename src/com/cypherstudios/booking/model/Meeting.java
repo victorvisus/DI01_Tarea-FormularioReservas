@@ -12,7 +12,7 @@ public class Meeting extends Booking {
 
     private final String eventType = "Congreso";
 
-    private int days;
+    private int journeys;
     private char hosting; //valores 'Y' para si, 'N' para no
     private HostingRoom rooms;
 
@@ -34,20 +34,20 @@ public class Meeting extends Booking {
      * @param reservation
      * @param attendees
      * @param typeCuisine
-     * @param days
+     * @param journeys
      * @param hosting
      * @param numDays
      * @param numRooms
      */
-    public Meeting(Date reservation, int attendees, String typeCuisine, int days, char hosting, int numDays, int numRooms) {
+    public Meeting(Date reservation, int attendees, String typeCuisine, int journeys, char hosting, int numDays, int numRooms) {
         super(reservation, attendees, typeCuisine);
 
-        this.days = days;
+        this.journeys = journeys;
         this.hosting = hosting;
 
         if (hosting == 'Y') {
             try {
-                HostingRoom.evaluateData(numDays, numRooms); // Evalua que tenemos los datos
+                HostingRoom.evaluateRoomsData(numDays, numRooms); // Evalua que tenemos los datos
 
                 HostingRoom rooms = new HostingRoom(numDays, numRooms);
 
@@ -65,11 +65,11 @@ public class Meeting extends Booking {
     }
 
     public int getDays() {
-        return days;
+        return journeys;
     }
 
     public void setDays(int days) {
-        this.days = days;
+        this.journeys = days;
     }
 
     public char getHosting() {
@@ -83,7 +83,7 @@ public class Meeting extends Booking {
     @Override
     public String toString() {
         return super.toString() + "\nTipo de Evento: " + eventType
-                + "\nNº de Jornadas: " + days
+                + "\nNº de Jornadas: " + journeys
                 + "\n¿Necesita hotel? " + hosting;
     }
 

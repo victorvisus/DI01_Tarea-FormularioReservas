@@ -6,6 +6,7 @@ import com.cypherstudios.booking.view.BookingDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -30,6 +31,8 @@ import javax.swing.JTextField;
 public class CtrlBooking extends CtrlInit implements ActionListener {
 
     private final BookingDialog bookingWindow = new BookingDialog(appInit, true);
+
+    private Booking reservation;
 
     public CtrlBooking() {
         /* Listener para opciones de menú */
@@ -71,7 +74,6 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
             JOptionPane.showMessageDialog(null, "Código no implementado todavía", "Reserva de espacio", JOptionPane.INFORMATION_MESSAGE);
 
             //1º Valida el formulairo
-            Booking reservation = null;
 
             /*
             0. Los campos numero de dias y numero de habitaciones, estarán deshabilitados
@@ -104,19 +106,21 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
     //Spinner Date --> https://es.stackoverflow.com/questions/213746/como-sacar-un-localdate-de-un-jspinner-que-tiene-un-date
     private Booking actionBtnSaveBooking(Booking reservation) {
 
-        bookingWindow.attendees.getValue();
-
         //Manda a comprobar que el tipo de reserva sea "Congreso"
         if (dataEvaluate(bookingWindow.cbEventType, "Congreso")) {
             reservation = new Meeting();
 
-            HostingRoom h = new HostingRoom();
-            h.setNumDays((int) bookingWindow.numDays.getValue());
-            h.setNumDays((int) bookingWindow.numRooms.getValue());
+            reservation.setReservation((Date) bookingWindow.dateReservation.getValue());
+            reservation.setAttendees((int) bookingWindow.spAttendees.getValue());
+            reservation.setTypeCuisine((String) bookingWindow.cbTypeCuisine.getSelectedItem());
 
-        };
+            if (bookingWindow.rbtnHostingYes.isSelected()) {
+                reservation.setHosting('Y');
+            } else if (bookingWindow.rbtnHostingNo.isSelected()) {
+                reservation.setHosting('N');
+            }
+        }
 
-        //Añade valores a los atributos del objeto
         return reservation;
     }
 

@@ -206,20 +206,26 @@
                           <Component id="cbEventType" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="lbAttendees" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbHosrting" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbHosting" max="32767" attributes="0"/>
+                          <Component id="lbJourneys" max="32767" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rbtnHostingYes" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rbtnHostingNo" min="-2" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="attendees" min="-2" pref="79" max="-2" attributes="0"/>
+                              <Component id="spAttendees" min="-2" pref="79" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="rbtnHostingYes" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="rbtnHostingNo" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="spJourneys" alignment="1" min="-2" pref="79" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -232,27 +238,33 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbEventType" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cbEventType" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="rbtnHostingYes" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbHosrting" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="rbtnHostingNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbJourneys" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spJourneys" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbTypeCuisine" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbTypeCuisine" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="rbtnHostingYes" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHosting" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbtnHostingNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lbTypeCuisine" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbTypeCuisine" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbDateReservation" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="dateReservation" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbAttendees" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="attendees" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spAttendees" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="51" max="32767" attributes="0"/>
+              <EmptySpace pref="50" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                       <Component id="btnReturn" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -375,7 +387,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JSpinner" name="attendees">
+    <Component class="javax.swing.JSpinner" name="spAttendees">
       <Properties>
         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
           <SpinnerModel initial="5" maximum="120" minimum="5" numberType="java.lang.Integer" stepSize="1" type="number"/>
@@ -520,7 +532,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="lbHosrting">
+    <Component class="javax.swing.JLabel" name="lbHosting">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alojamiento"/>
         <Property name="toolTipText" type="java.lang.String" value="&#xbf;Necesitas alojamiento?"/>
@@ -536,6 +548,24 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnHostingNoActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbJourneys">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="N&#xba; Jornadas"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="spJourneys">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="1" maximum="120" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Dinos los asistentes al evento"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
