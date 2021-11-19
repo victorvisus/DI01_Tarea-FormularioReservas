@@ -18,8 +18,7 @@ public class CtrlInit implements ActionListener {
     protected static ArrayList<Booking> publicBookingList = new ArrayList();
 
     /**
-     * Constructor "vacio" de la clase, en el cual se inician las "escuchas" a
-     * los botones del panel
+     * Constructor en el que se inician las "escuchas" a     * los botones del panel
      */
     public CtrlInit() {
         /* Listener para opciones de menú */
