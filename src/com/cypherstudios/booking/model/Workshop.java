@@ -24,7 +24,7 @@ public class Workshop extends Booking {
 
     @Override
     public String toString() {
-        return super.toString() + "\nTipo de Evento: " + eventType;
+        return "\nTipo de Evento: " + eventType + "\n" + super.toString();
     }
 
     @Override

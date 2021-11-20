@@ -70,7 +70,7 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
         }
         if (e.getSource() == bookingWindow.btnSaveBooking || e.getSource() == bookingWindow.navItemSaveBooking) {
             try {
-                JOptionPane.showMessageDialog(null, "Código no implementado todavía", "Reserva de espacio", JOptionPane.INFORMATION_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Código no implementado todavía", "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
 
                 //1º Valida el formulairo
                 /*
@@ -87,11 +87,15 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
                  */
                 Booking reservation = null;
                 publicBookingList.add(actionBtnSaveBooking(reservation));
+
                 //Una vez hecha la reserva que limie el formulario
                 limpiaForm();
             } catch (BookingExceptions ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(),
-                        "Los datos recibidos no son correctos", JOptionPane.ERROR_MESSAGE);
+                        "Reserva de evento", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                JOptionPane.showMessageDialog(null, "Reserva registrado correctamente",
+                        "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
             }
         }
         if (e.getSource() == bookingWindow.navItemBookingList) {
@@ -118,6 +122,8 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
             reservation.setTypeCuisine((String) bookingWindow.cbTypeCuisine.getSelectedItem());
 
             if (reservation instanceof Meeting) {
+                ((Meeting) reservation).setJourneys((int) bookingWindow.spJourneys.getValue());
+
                 if (bookingWindow.rbtnHostingYes.isSelected()) {
                     ((Meeting) reservation).setHosting('Y');
                     //Recojo los valores para los datos de HostingRoom
@@ -130,14 +136,20 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
                 } else if (bookingWindow.rbtnHostingNo.isSelected()) {
                     ((Meeting) reservation).setHosting('N');
                 }
-                ((Meeting) reservation).setJourneys((int) bookingWindow.spJourneys.getValue());
 
             }
             System.out.println(reservation.toString());
 
+            //System.out.println("El evento es un Congreso");
         } else if (dataEvaluate(bookingWindow.cbEventType, "Banquete")) {
             reservation = new Banquet();
-            System.out.println("El evento es un Banquete");
+
+            reservation.setReservation((Date) bookingWindow.dateReservation.getValue());
+            reservation.setAttendees((int) bookingWindow.spAttendees.getValue());
+            reservation.setTypeCuisine((String) bookingWindow.cbTypeCuisine.getSelectedItem());
+
+            //System.out.println("El evento es un Banquete");
+            System.out.println(reservation.toString());
         } else if (dataEvaluate(bookingWindow.cbEventType, "Jornada")) {
             reservation = new Workshop();
             System.out.println("El evento es un Jornada");

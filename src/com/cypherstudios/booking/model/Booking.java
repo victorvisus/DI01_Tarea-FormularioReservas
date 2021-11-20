@@ -1,5 +1,6 @@
 package com.cypherstudios.booking.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -54,8 +55,10 @@ public abstract class Booking implements Comparable<Booking> {
     /* Método toString */
     @Override
     public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
         return "/**** Booking ****/"
-                + "\nFecha: " + reservation
+                + "\nFecha: " + sdf.format(reservation)
                 + "\nAsistentes: " + attendees
                 + "\nTipo de cocina: " + typeCuisine;
     }
@@ -63,4 +66,5 @@ public abstract class Booking implements Comparable<Booking> {
     /* Método compareTo por si quiero ordenar el las reservas del ArrayList */
     @Override
     public abstract int compareTo(Booking b);
+
 }

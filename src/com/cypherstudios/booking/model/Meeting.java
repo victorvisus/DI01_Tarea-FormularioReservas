@@ -101,10 +101,20 @@ public class Meeting extends Booking {
 
     @Override
     public String toString() {
-        return super.toString() + "\nTipo de Evento: " + eventType
+        String roomsData;
+
+        if (hosting == 'Y') {
+            roomsData = rooms.toString();
+        } else {
+            roomsData = " ,No son necesarias habitaciones de hotel.";
+        }
+
+        String meeting = "\nTipo de Evento: " + eventType
                 + "\nNº de Jornadas: " + journeys
                 + "\n¿Necesita hotel? " + hosting
-                + rooms.toString();
+                + roomsData;
+
+        return meeting + "\n" + super.toString();
     }
 
     @Override
