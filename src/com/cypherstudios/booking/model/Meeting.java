@@ -22,6 +22,24 @@ public class Meeting extends Booking {
     }
 
     /**
+     * Constructor a falta de los valores para la reserva de habitaciones
+     *
+     * @param reservation
+     * @param attendees
+     * @param typeCuisine
+     * @param journeys
+     * @param hosting
+     */
+    public Meeting(Date reservation, int attendees, String typeCuisine,
+            int journeys, char hosting) {
+        super(reservation, attendees, typeCuisine);
+
+        this.journeys = journeys;
+        this.hosting = hosting;
+
+    }
+
+    /**
      * Constructor de la clase
      *
      * Llama al constructor de la clase padre Booking, pasándole los atributos
@@ -39,7 +57,8 @@ public class Meeting extends Booking {
      * @param numDays
      * @param numRooms
      */
-    public Meeting(Date reservation, int attendees, String typeCuisine, int journeys, char hosting, int numDays, int numRooms) {
+    public Meeting(Date reservation, int attendees, String typeCuisine,
+            int journeys, char hosting, int numDays, int numRooms) {
         super(reservation, attendees, typeCuisine);
 
         this.journeys = journeys;
@@ -54,7 +73,7 @@ public class Meeting extends Booking {
                 this.rooms = rooms;
             } catch (BookingExceptions ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(),
-                        "Error al establecer la puntuación", JOptionPane.ERROR_MESSAGE);
+                        "Los datos recibidos no son correctos", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -64,11 +83,11 @@ public class Meeting extends Booking {
         return eventType;
     }
 
-    public int getDays() {
+    public int getJourneys() {
         return journeys;
     }
 
-    public void setDays(int days) {
+    public void setJourneys(int days) {
         this.journeys = days;
     }
 
@@ -84,11 +103,31 @@ public class Meeting extends Booking {
     public String toString() {
         return super.toString() + "\nTipo de Evento: " + eventType
                 + "\nNº de Jornadas: " + journeys
-                + "\n¿Necesita hotel? " + hosting;
+                + "\n¿Necesita hotel? " + hosting
+                + rooms.toString();
     }
 
     @Override
     public int compareTo(Booking b) {
         throw new UnsupportedOperationException("Método compareTo no implementado."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Crea el objeto HostingRooms
+     *
+     * @param numDays
+     * @param numRooms
+     */
+    public void roomsValues(int numDays, int numRooms) {
+        try {
+            HostingRoom.evaluateRoomsData(numDays, numRooms); // Evalua que tenemos los datos
+
+            HostingRoom rooms = new HostingRoom(numDays, numRooms);
+
+            this.rooms = rooms;
+        } catch (BookingExceptions ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    "Error al establecer la puntuación", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

@@ -32,6 +32,10 @@ public class BookingExceptions extends Exception {
                 //Registro de nueva reserva:
                 errorMsg = "Los datos para realizar la reserva son insuficientes";
                 break;
+            case 2:
+                //Registro de nueva reserva:
+                errorMsg = "Error al realizar la reserva";
+                break;
 
             default:
                 errorMsg = "Error de ejecución";

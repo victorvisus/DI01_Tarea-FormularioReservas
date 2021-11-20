@@ -32,8 +32,6 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
 
     private final BookingDialog bookingWindow = new BookingDialog(appInit, true);
 
-    private Booking reservation;
-
     public CtrlBooking() {
         /* Listener para opciones de menú */
         this.bookingWindow.navItemSaveBooking.addActionListener(this);
@@ -71,25 +69,30 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
             this.bookingWindow.setVisible(false);
         }
         if (e.getSource() == bookingWindow.btnSaveBooking || e.getSource() == bookingWindow.navItemSaveBooking) {
-            JOptionPane.showMessageDialog(null, "Código no implementado todavía", "Reserva de espacio", JOptionPane.INFORMATION_MESSAGE);
+            try {
+                JOptionPane.showMessageDialog(null, "Código no implementado todavía", "Reserva de espacio", JOptionPane.INFORMATION_MESSAGE);
 
-            //1º Valida el formulairo
-
-            /*
-            0. Los campos numero de dias y numero de habitaciones, estarán deshabilitados
-            Si detecta que el valor del campo eventType es Meeting los avilitará.
-            1. Llama al método que recogerá todos los datos del formulario y
-            comprueba que estan todos completos, si no es asi lanza una exception
-            2. Evalua el valor del atributo eventType para instanciar un objeto
-            de un tipo u otro: (Banquet; Workshop o Meeting)
-            - Si el objeto es de tipo Meeting evalua si el valor de hosting es Y o N
-            - Si es Y abré el JDialog HostingDialog donde recoge los valores para el objeto de tipo HostingRoom
-            y crear el objeto HostingRoom para añadirlo como atributo del objeto Meeting
-            3. Crea el objeto correspondiente y lo devuelve, para añadirlo al ArraList
-             */
-            publicBookingList.add(actionBtnSaveBooking(reservation));
-            //Una vez hecha la reserva que limie el formulario
-            limpiaForm();
+                //1º Valida el formulairo
+                /*
+                0. Los campos numero de dias y numero de habitaciones, estarán deshabilitados
+                Si detecta que el valor del campo eventType es Meeting los avilitará.
+                1. Llama al método que recogerá todos los datos del formulario y
+                comprueba que estan todos completos, si no es asi lanza una exception
+                2. Evalua el valor del atributo eventType para instanciar un objeto
+                de un tipo u otro: (Banquet; Workshop o Meeting)
+                - Si el objeto es de tipo Meeting evalua si el valor de hosting es Y o N
+                - Si es Y abré el JDialog HostingDialog donde recoge los valores para el objeto de tipo HostingRoom
+                y crear el objeto HostingRoom para añadirlo como atributo del objeto Meeting
+                3. Crea el objeto correspondiente y lo devuelve, para añadirlo al ArraList
+                 */
+                Booking reservation = null;
+                publicBookingList.add(actionBtnSaveBooking(reservation));
+                //Una vez hecha la reserva que limie el formulario
+                limpiaForm();
+            } catch (BookingExceptions ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(),
+                        "Los datos recibidos no son correctos", JOptionPane.ERROR_MESSAGE);
+            }
         }
         if (e.getSource() == bookingWindow.navItemBookingList) {
             //JOptionPane.showMessageDialog(null, "Código no implementado todavía", "Reserva de espacio", JOptionPane.INFORMATION_MESSAGE);
@@ -104,7 +107,7 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
     //MÉTODO PARA EXTRAER LOS DVALORES DEL FORMULARIOÇ
     //Spinner --> http://amanuva.blogspot.com/2016/02/010-uso-de-spinner-java-y-netbeans.html
     //Spinner Date --> https://es.stackoverflow.com/questions/213746/como-sacar-un-localdate-de-un-jspinner-que-tiene-un-date
-    private Booking actionBtnSaveBooking(Booking reservation) {
+    private Booking actionBtnSaveBooking(Booking reservation) throws BookingExceptions {
 
         //Manda a comprobar que el tipo de reserva sea "Congreso"
         if (dataEvaluate(bookingWindow.cbEventType, "Congreso")) {
@@ -114,16 +117,46 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
             reservation.setAttendees((int) bookingWindow.spAttendees.getValue());
             reservation.setTypeCuisine((String) bookingWindow.cbTypeCuisine.getSelectedItem());
 
-            if (bookingWindow.rbtnHostingYes.isSelected()) {
-                reservation.setHosting('Y');
-            } else if (bookingWindow.rbtnHostingNo.isSelected()) {
-                reservation.setHosting('N');
+            if (reservation instanceof Meeting) {
+                if (bookingWindow.rbtnHostingYes.isSelected()) {
+                    ((Meeting) reservation).setHosting('Y');
+                    //Recojo los valores para los datos de HostingRoom
+
+                    int numDays = (int) bookingWindow.numDays.getValue();
+                    int numRooms = (int) bookingWindow.numRooms.getValue();
+
+                    ((Meeting) reservation).roomsValues(numDays, numRooms);
+
+                } else if (bookingWindow.rbtnHostingNo.isSelected()) {
+                    ((Meeting) reservation).setHosting('N');
+                }
+                ((Meeting) reservation).setJourneys((int) bookingWindow.spJourneys.getValue());
+
             }
+            System.out.println(reservation.toString());
+
+        } else if (dataEvaluate(bookingWindow.cbEventType, "Banquete")) {
+            reservation = new Banquet();
+            System.out.println("El evento es un Banquete");
+        } else if (dataEvaluate(bookingWindow.cbEventType, "Jornada")) {
+            reservation = new Workshop();
+            System.out.println("El evento es un Jornada");
+
+        } else {
+            throw new BookingExceptions(2);
         }
 
         return reservation;
     }
 
+    /**
+     * Evalua si el item seleccionado en un JComboBox coincide con el enviado
+     * por parámetro
+     *
+     * @param cb : el componente JComboBox
+     * @param evType : String que contiene la cadena válida
+     * @return : true o false dependiendo del resultado
+     */
     private boolean dataEvaluate(JComboBox cb, String evType) {
         String tipo = (String) cb.getSelectedItem();
 

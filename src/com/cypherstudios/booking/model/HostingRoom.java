@@ -1,6 +1,7 @@
 package com.cypherstudios.booking.model;
 
 import com.cypherstudios.booking.exceptions.BookingExceptions;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,8 +17,16 @@ public class HostingRoom {
     }
 
     public HostingRoom(int numDays, int numRooms) {
-        this.numDays = numDays;
-        this.numRooms = numRooms;
+
+        try {
+            evaluateRoomsData(numDays, numRooms);
+
+            this.numDays = numDays;
+            this.numRooms = numRooms;
+        } catch (BookingExceptions ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    "Los datos recibidos no son correctos", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /* Getter and Setters */
@@ -40,7 +49,7 @@ public class HostingRoom {
     /* Método toString */
     @Override
     public String toString() {
-        return "\nDAtos de reserva de Habitaciones"
+        return "\nDatos de reserva de Habitaciones"
                 + "\nNº de días: " + numDays
                 + "\nNº de habitaciones: " + numRooms;
     }
