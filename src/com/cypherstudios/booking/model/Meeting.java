@@ -30,9 +30,9 @@ public class Meeting extends Booking {
      * @param journeys
      * @param hosting
      */
-    public Meeting(Date reservation, int attendees, String typeCuisine,
+    public Meeting(String customerName, Date reservation, int attendees, String typeCuisine,
             int journeys, char hosting) {
-        super(reservation, attendees, typeCuisine);
+        super(customerName, reservation, attendees, typeCuisine);
 
         this.journeys = journeys;
         this.hosting = hosting;
@@ -57,9 +57,9 @@ public class Meeting extends Booking {
      * @param numDays
      * @param numRooms
      */
-    public Meeting(Date reservation, int attendees, String typeCuisine,
+    public Meeting(String customerName, Date reservation, int attendees, String typeCuisine,
             int journeys, char hosting, int numDays, int numRooms) {
-        super(reservation, attendees, typeCuisine);
+        super(customerName, reservation, attendees, typeCuisine);
 
         this.journeys = journeys;
         this.hosting = hosting;

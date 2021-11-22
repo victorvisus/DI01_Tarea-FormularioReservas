@@ -14,8 +14,8 @@ public class Banquet extends Booking {
         super();
     }
 
-    public Banquet(Date reservation, int attendees, String typeCuisine) {
-        super(reservation, attendees, typeCuisine);
+    public Banquet(String customerName, Date reservation, int attendees, String typeCuisine) {
+        super(customerName, reservation, attendees, typeCuisine);
     }
 
     public String getEventType() {

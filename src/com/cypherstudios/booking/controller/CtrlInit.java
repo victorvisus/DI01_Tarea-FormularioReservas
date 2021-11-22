@@ -1,10 +1,12 @@
 package com.cypherstudios.booking.controller;
 
-import com.cypherstudios.booking.model.Booking;
+import com.cypherstudios.booking.dao.BookingDAO;
+import com.cypherstudios.booking.model.*;
 import com.cypherstudios.booking.view.appIni;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -12,13 +14,15 @@ import java.util.ArrayList;
  */
 public class CtrlInit implements ActionListener {
 
+    protected static ArrayList<Booking> publicBookingList = new ArrayList();
+    //Instancia un Objeto de la clase que gestiona los datos
+    protected BookingDAO op = new BookingDAO(publicBookingList);
+
     //protected final Init appInit = new Init();
     protected final appIni appInit = new appIni();
 
-    protected static ArrayList<Booking> publicBookingList = new ArrayList();
-
     /**
-     * Constructor en el que se inician las "escuchas" a     * los botones del panel
+     * Constructor en el que se inician las "escuchas" a los botones del panel
      */
     public CtrlInit() {
         /* Listener para opciones de menú */
@@ -31,6 +35,9 @@ public class CtrlInit implements ActionListener {
         this.appInit.btnBookingList.addActionListener(this);
         this.appInit.btnExit.addActionListener(this);
 
+        this.publicBookingList.add(new Workshop("Victor", new Date(), 5, "Bufé"));
+        this.publicBookingList.add(new Banquet("Jeny", new Date(), 7, "Carta"));
+        this.publicBookingList.add(new Workshop("Angel", new Date(), 15, "No precisa"));
     }
 
     /**

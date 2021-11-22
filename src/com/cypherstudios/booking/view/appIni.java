@@ -5,7 +5,8 @@
  */
 package com.cypherstudios.booking.view;
 
-import java.awt.Color;
+import java.awt.*;
+import javax.swing.*;
 
 /**
  *
@@ -16,10 +17,21 @@ public class appIni extends javax.swing.JFrame {
     //Variables para el falso boton X cerrar
     int xMouse, yMouse;
 
+    //Variable para la img de background del JPanel lateral
+    BackgroundPanel bg = new BackgroundPanel();
+
+    //Colores
+    private Color colRed = new Color(255, 0, 0);
+    private Color colBlack = new Color(0, 0, 0);
+    private Color colWhite = new Color(255, 255, 255);
+
     /**
      * Creates new form appIni
      */
     public appIni() {
+        //Llama al método para establecer la imagen de fondo para el JPane
+        //this.setContentPane(bg);
+
         initComponents();
     }
 
@@ -32,13 +44,12 @@ public class appIni extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelBackground = new javax.swing.JPanel();
+        panelBackground = new BackgroundPanel();
         btnBookingList = new javax.swing.JButton();
-        btnBooking = new javax.swing.JButton();
         nameBooking = new javax.swing.JLabel();
         nameEvent = new javax.swing.JLabel();
         imgLogo = new javax.swing.JLabel();
-        menuLeft = new javax.swing.JLabel();
+        btnBooking = new javax.swing.JButton();
         formTittle = new javax.swing.JLabel();
         formDesc = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
@@ -47,6 +58,7 @@ public class appIni extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         setLocationByPlatform(true);
         setUndecorated(true);
         setResizable(false);
@@ -54,31 +66,36 @@ public class appIni extends javax.swing.JFrame {
         panelBackground.setBackground(new java.awt.Color(44, 44, 44));
         panelBackground.setMaximumSize(new java.awt.Dimension(800, 500));
         panelBackground.setMinimumSize(new java.awt.Dimension(800, 500));
+        panelBackground.setPreferredSize(new java.awt.Dimension(250, 500));
+        panelBackground.setRequestFocusEnabled(false);
         panelBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnBookingList.setBackground(btnExit.getBackground());
-        btnBookingList.setFont(btnExit.getFont());
+        btnBookingList.setBackground(new java.awt.Color(0, 0, 0));
+        btnBookingList.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         btnBookingList.setForeground(new java.awt.Color(255, 255, 255));
         btnBookingList.setText("Ver Eventos");
-        btnBookingList.setToolTipText("Lista los eventos contratados");
-        btnBookingList.setBorder(btnExit.getBorder());
-        btnBookingList.setBorderPainted(false);
+        btnBookingList.setToolTipText("Ver Eventos");
+        btnBookingList.setAutoscrolls(true);
+        btnBookingList.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 30, 7, 30));
         btnBookingList.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnBookingList.setNextFocusableComponent(btnExit);
-        panelBackground.add(btnBookingList, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 160, -1));
-        btnBookingList.getAccessibleContext().setAccessibleParent(this);
-
-        btnBooking.setBackground(btnExit.getBackground());
-        btnBooking.setFont(btnExit.getFont());
-        btnBooking.setForeground(new java.awt.Color(255, 255, 255));
-        btnBooking.setText("Reservar Evento");
-        btnBooking.setToolTipText("Reservar Evento");
-        btnBooking.setBorder(btnExit.getBorder());
-        btnBooking.setBorderPainted(false);
-        btnBooking.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnBooking.setNextFocusableComponent(btnBookingList);
-        panelBackground.add(btnBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
-        btnBooking.getAccessibleContext().setAccessibleParent(this);
+        btnBookingList.setPreferredSize(new java.awt.Dimension(250, 50));
+        btnBookingList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBookingListMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBookingListMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBookingListMouseExited(evt);
+            }
+        });
+        btnBookingList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBookingListActionPerformed(evt);
+            }
+        });
+        panelBackground.add(btnBookingList, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 250, -1));
 
         nameBooking.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
         nameBooking.setForeground(new java.awt.Color(160, 0, 0));
@@ -95,16 +112,37 @@ public class appIni extends javax.swing.JFrame {
         imgLogo.setToolTipText("");
         panelBackground.add(imgLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 250, 100));
 
-        menuLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/cypherstudios/booking/resources/img-bg-dark.jpg"))); // NOI18N
-        menuLeft.setMaximumSize(new java.awt.Dimension(420, 500));
-        menuLeft.setMinimumSize(new java.awt.Dimension(420, 500));
-        menuLeft.setPreferredSize(new java.awt.Dimension(420, 500));
-        panelBackground.add(menuLeft, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 500));
+        btnBooking.setBackground(new java.awt.Color(0, 0, 0));
+        btnBooking.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnBooking.setForeground(new java.awt.Color(255, 255, 255));
+        btnBooking.setText("Reservar Evento");
+        btnBooking.setToolTipText("Reservar Evento");
+        btnBooking.setAutoscrolls(true);
+        btnBooking.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 30, 7, 30));
+        btnBooking.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBooking.setPreferredSize(new java.awt.Dimension(250, 50));
+        btnBooking.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBookingMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBookingMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBookingMouseExited(evt);
+            }
+        });
+        btnBooking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBookingActionPerformed(evt);
+            }
+        });
+        panelBackground.add(btnBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 250, -1));
 
         formTittle.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         formTittle.setText("ORGANIZA TU EVENTO");
 
-        formDesc.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        formDesc.setFont(getFont());
         formDesc.setText("<html><p style=\\\"width:100%\\\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sapien neque, sodales vehicula faucibus in, porta eu mauris. In nec mollis nunc, vitae euismod libero. Morbi elementum urna neque, ut porttitor risus aliquam at. Donec venenatis nunc sed condimentum aliquet. Mauris est risus, consequat id urna eu, iaculis hendrerit ipsum. Nulla non massa vel felis pretium euismod sit amet sed libero.</p></html>");
         formDesc.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
@@ -114,6 +152,15 @@ public class appIni extends javax.swing.JFrame {
         btnExit.setText("SALIR");
         btnExit.setToolTipText("Cierra la aplicación");
         btnExit.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 30, 7, 30));
+        btnExit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnExitMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnExitMouseExited(evt);
+            }
+        });
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -167,23 +214,23 @@ public class appIni extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnExit))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(33, 33, 33)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(formDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(formTittle)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(48, 48, 48))
-                    .addComponent(pnlHeader, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnExit)))
+                        .addGap(50, 50, 50))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(118, 118, 118)
@@ -193,6 +240,7 @@ public class appIni extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnExit)
                 .addGap(25, 25, 25))
+            .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -231,8 +279,7 @@ public class appIni extends javax.swing.JFrame {
     }//GEN-LAST:event_exitTxtMouseClicked
 
     private void exitTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseEntered
-        //exitTxt.setBackground(new Color(255, 0, 0));
-        exitTxt.setBackground(Color.red);
+        exitTxt.setBackground(colRed);
         exitTxt.setForeground(Color.white);
     }//GEN-LAST:event_exitTxtMouseEntered
 
@@ -241,6 +288,48 @@ public class appIni extends javax.swing.JFrame {
         exitTxt.setBackground(getBackground());
         exitTxt.setForeground(nameEvent.getForeground());
     }//GEN-LAST:event_exitTxtMouseExited
+
+    private void btnBookingListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookingListActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBookingListActionPerformed
+
+    private void btnBookingListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBookingListMouseClicked
+
+        btnBookingList.setForeground(colRed);
+
+    }//GEN-LAST:event_btnBookingListMouseClicked
+
+    private void btnBookingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBookingMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBookingMouseClicked
+
+    private void btnBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBookingActionPerformed
+
+    private void btnBookingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBookingMouseEntered
+        btnHoverOn(this.btnBooking);
+    }//GEN-LAST:event_btnBookingMouseEntered
+
+    private void btnBookingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBookingMouseExited
+        btnHoverOut(this.btnBooking);
+    }//GEN-LAST:event_btnBookingMouseExited
+
+    private void btnBookingListMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBookingListMouseEntered
+        btnHoverOn(this.btnBookingList);
+    }//GEN-LAST:event_btnBookingListMouseEntered
+
+    private void btnBookingListMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBookingListMouseExited
+        btnHoverOut(this.btnBookingList);
+    }//GEN-LAST:event_btnBookingListMouseExited
+
+    private void btnExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseEntered
+        btnHoverOn(this.btnExit);
+    }//GEN-LAST:event_btnExitMouseEntered
+
+    private void btnExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseExited
+        btnHoverOut(this.btnExit);
+    }//GEN-LAST:event_btnExitMouseExited
 
     /**
      * @param args the command line arguments
@@ -285,10 +374,36 @@ public class appIni extends javax.swing.JFrame {
     private javax.swing.JLabel formDesc;
     private javax.swing.JLabel formTittle;
     private javax.swing.JLabel imgLogo;
-    private javax.swing.JLabel menuLeft;
     private javax.swing.JLabel nameBooking;
     private javax.swing.JLabel nameEvent;
     private javax.swing.JPanel panelBackground;
     public javax.swing.JPanel pnlHeader;
     // End of variables declaration//GEN-END:variables
+
+
+    /* Métodos Hover */
+    private void btnHoverOn(javax.swing.JButton btn) {
+        btn.setBackground(colRed);
+        btn.setForeground(colBlack);
+    }
+
+    private void btnHoverOut(javax.swing.JButton btn) {
+        btn.setBackground(colBlack);
+        btn.setForeground(colWhite);
+    }
+
+    /* Clase interna para poner img background al JPanel*/
+    class BackgroundPanel extends JPanel {
+
+        private Image imgBg;
+
+        @Override
+        public void paint(Graphics g) {
+            imgBg = new ImageIcon(getClass().getResource("../resources/img-bg-left-dark.jpg")).getImage();
+            g.drawImage(imgBg, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
+    }
+
 }

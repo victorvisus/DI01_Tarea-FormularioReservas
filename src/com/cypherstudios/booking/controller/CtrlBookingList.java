@@ -23,6 +23,7 @@ public class CtrlBookingList extends CtrlInit {
 
         /* Listener para botones */
         this.bookingListWindows.btnReturn.addActionListener(this);
+        this.bookingListWindows.btnBookingList.addActionListener(this);
     }
 
     /**
@@ -49,5 +50,11 @@ public class CtrlBookingList extends CtrlInit {
             //Cierra el JDialog y vuelve a al JFrame principal
             this.bookingListWindows.setVisible(false);
         }
+        /* Botón listar las Reservas */
+        if (e.getSource() == bookingListWindows.btnBookingList) {
+            System.out.println("Has presionado el boton");
+            op.tableBookinList(bookingListWindows.jtBookingList);
+        }
     }
+
 }

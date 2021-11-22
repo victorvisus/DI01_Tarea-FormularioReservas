@@ -1,15 +1,9 @@
 package com.cypherstudios.booking.controller;
 
-import com.cypherstudios.booking.exceptions.BookingExceptions;
 import com.cypherstudios.booking.model.*;
 import com.cypherstudios.booking.view.BookingDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Date;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  * Clase controlador para el JDialog que se encarga de solicitar los datos
@@ -69,184 +63,19 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
             this.bookingWindow.setVisible(false);
         }
         if (e.getSource() == bookingWindow.btnSaveBooking || e.getSource() == bookingWindow.navItemSaveBooking) {
-            try {
-                //JOptionPane.showMessageDialog(null, "Código no implementado todavía", "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
+            //Crea el objeto Booking
+            Booking reservation = null;
 
-                //1º Valida el formulairo
-                /*
-                0. Los campos numero de dias y numero de habitaciones, estarán deshabilitados
-                Si detecta que el valor del campo eventType es Meeting los avilitará.
-                1. Llama al método que recogerá todos los datos del formulario y
-                comprueba que estan todos completos, si no es asi lanza una exception
-                2. Evalua el valor del atributo eventType para instanciar un objeto
-                de un tipo u otro: (Banquet; Workshop o Meeting)
-                - Si el objeto es de tipo Meeting evalua si el valor de hosting es Y o N
-                - Si es Y abré el JDialog HostingDialog donde recoge los valores para el objeto de tipo HostingRoom
-                y crear el objeto HostingRoom para añadirlo como atributo del objeto Meeting
-                3. Crea el objeto correspondiente y lo devuelve, para añadirlo al ArraList
-                 */
-                Booking reservation = null;
-                publicBookingList.add(actionBtnSaveBooking(reservation));
+            //Llama al método que se encarga de realizar la operación
+            op.saveBooking(bookingWindow, reservation);
 
-                //Una vez hecha la reserva que limie el formulario
-                limpiaForm();
-            } catch (BookingExceptions ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(),
-                        "Reserva de evento", JOptionPane.ERROR_MESSAGE);
-            } finally {
-                JOptionPane.showMessageDialog(null, "Reserva registrado correctamente",
-                        "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
-            }
         }
         if (e.getSource() == bookingWindow.navItemBookingList) {
-            //JOptionPane.showMessageDialog(null, "Código no implementado todavía", "Reserva de espacio", JOptionPane.INFORMATION_MESSAGE);
-
             //Crea una instancia del controller CtrflBookingList
             CtrlBookingList openList = new CtrlBookingList();
             //Iniciar el JDialog BookingList
             openList.runListWindow();
+
         }
-    }
-
-    //MÉTODO PARA EXTRAER LOS DVALORES DEL FORMULARIOÇ
-    //Spinner --> http://amanuva.blogspot.com/2016/02/010-uso-de-spinner-java-y-netbeans.html
-    //Spinner Date --> https://es.stackoverflow.com/questions/213746/como-sacar-un-localdate-de-un-jspinner-que-tiene-un-date
-    private Booking actionBtnSaveBooking(Booking reservation) throws BookingExceptions {
-
-        //Manda a comprobar que el tipo de reserva sea "Congreso"
-        if (dataEvaluate(bookingWindow.cbEventType, "Congreso")) {
-            reservation = new Meeting();
-
-            reservation.setReservation((Date) bookingWindow.dateReservation.getValue());
-            reservation.setAttendees((int) bookingWindow.spAttendees.getValue());
-            reservation.setTypeCuisine((String) bookingWindow.cbTypeCuisine.getSelectedItem());
-
-            if (reservation instanceof Meeting) {
-                ((Meeting) reservation).setJourneys((int) bookingWindow.spJourneys.getValue());
-
-                if (bookingWindow.rbtnHostingYes.isSelected()) {
-                    ((Meeting) reservation).setHosting('Y');
-                    //Recojo los valores para los datos de HostingRoom
-
-                    int numDays = (int) bookingWindow.numDays.getValue();
-                    int numRooms = (int) bookingWindow.numRooms.getValue();
-
-                    ((Meeting) reservation).roomsValues(numDays, numRooms);
-
-                } else if (bookingWindow.rbtnHostingNo.isSelected()) {
-                    ((Meeting) reservation).setHosting('N');
-                }
-
-            }
-            System.out.println(reservation.toString());
-
-            //System.out.println("El evento es un Congreso");
-        } else if (dataEvaluate(bookingWindow.cbEventType, "Banquete")) {
-            reservation = new Banquet();
-
-            reservation.setReservation((Date) bookingWindow.dateReservation.getValue());
-            reservation.setAttendees((int) bookingWindow.spAttendees.getValue());
-            reservation.setTypeCuisine((String) bookingWindow.cbTypeCuisine.getSelectedItem());
-
-            //System.out.println("El evento es un Banquete");
-            System.out.println(reservation.toString());
-        } else if (dataEvaluate(bookingWindow.cbEventType, "Jornada")) {
-            reservation = new Workshop();
-            System.out.println("El evento es un Jornada");
-
-        } else {
-            throw new BookingExceptions(2);
-        }
-
-        return reservation;
-    }
-
-    /**
-     * Evalua si el item seleccionado en un JComboBox coincide con el enviado
-     * por parámetro
-     *
-     * @param cb : el componente JComboBox
-     * @param evType : String que contiene la cadena válida
-     * @return : true o false dependiendo del resultado
-     */
-    private boolean dataEvaluate(JComboBox cb, String evType) {
-        String tipo = (String) cb.getSelectedItem();
-
-        if (tipo == evType) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Valida el formulario de registro. Llama a los distintos métodos y les
-     * pasa los datos necesarios para cada una de las validaciones
-     *
-     * Para validar campos duplicados recogo el error que lanza la BBDD, esta
-     * operación se encuentra en el bloque try/catch del método de control
-     *
-     * @throws BinainException : lanza un mensaje dependiendo del tipo de error
-     */
-    /*
-    private void validaForm() throws BinainException {
-
-        String pass = new String(appRegistro.txtPassword.getPassword());
-        String passConf = new String(appRegistro.txtPasswordConf.getPassword());
-
-        //Validaciones
-        validaciones.valCorreo(appRegistro.txtEmail.getText());
-        validaciones.valPassword(pass, passConf);
-        validaciones.valTipoUser(appRegistro.rbtnArtista, appRegistro.rbtnSala);
-
-        //Validar los campos que no pueden estar vacios
-        ArrayList<JTextField> campos = new ArrayList<>();
-        campos.add(appRegistro.txtNickName);
-        campos.add(appRegistro.txtLocalidad);
-        if (appRegistro.rbtnArtista.isSelected()) {
-            campos.add(appRegistro.txtNombreArtista);
-        } else if (appRegistro.rbtnSala.isSelected()) {
-            campos.add(appRegistro.txtNombreSala);
-        }
-        validaciones.valCamposNull(campos);
-    }
-     */
- /*
-        private void limpiaForm() {
-        bookingWindow.txtNickName.setText(null);
-        bookingWindow.txtEmail.setText(null);
-        bookingWindow.txtPassword.setText(null);
-        bookingWindow.txtPasswordConf.setText(null);
-
-        bookingWindow.txtNombre.setText(null);
-        bookingWindow.txtApellido.setText(null);
-        bookingWindow.txtDireccion.setText(null);
-        bookingWindow.txtLocalidad.setText(null);
-
-        bookingWindow.rbtnArtista.setSelected(false);
-        bookingWindow.rbtnSala.setSelected(false);
-    }
-     */
-    /**
-     * Comprueba que los campos enviados en el ArrayList no estén vacíos.
-     *
-     * @param campos : ArraList que incluye los campos del formulario que no
-     * queremos que estén vacíos
-     * @throws BinainException
-     */
-    public static void valCamposNull(ArrayList<JTextField> campos) throws BookingExceptions {
-        /*Estaria bien que el campo que este vacio lo pinte de alguna manera, pero
-        después al hacer focus deberia volver a su color original */
-        for (JTextField aux : campos) {
-            if (aux.getText().isEmpty()) {
-                throw new BookingExceptions(2);
-            }
-        }
-
-    }
-
-    private void limpiaForm() {
-        JOptionPane.showMessageDialog(null, "Código no implementado todavía, tiene que limpiar el formulario",
-                "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
     }
 }

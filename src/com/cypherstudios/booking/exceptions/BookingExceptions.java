@@ -36,7 +36,14 @@ public class BookingExceptions extends Exception {
                 //Registro de nueva reserva:
                 errorMsg = "Error al realizar la reserva";
                 break;
-
+            case 3:
+                //No se ha seleccionado una opción en el JComboBox
+                errorMsg = "Por favor, elije un tipo de evento y de cocina";
+                break;
+            case 4:
+                //No se ha seleccionado una opción en el JComboBox
+                errorMsg = "¿Necesitas reservar habitaciones en el hotel?";
+                break;
             default:
                 errorMsg = "Error de ejecución";
                 break;
