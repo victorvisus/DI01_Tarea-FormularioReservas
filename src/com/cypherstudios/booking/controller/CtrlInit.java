@@ -14,8 +14,9 @@ import java.util.Date;
  */
 public class CtrlInit implements ActionListener {
 
-    protected static ArrayList<Booking> publicBookingList = new ArrayList();
-    //Instancia un Objeto de la clase que gestiona los datos
+    //Inicializa un atributo con el ArrayList
+    protected ArrayList<Booking> publicBookingList = new ArrayList();
+    //Instancia un Objeto de la clase que gestiona los datos y le envia el ArrayList
     protected BookingDAO op = new BookingDAO(publicBookingList);
 
     //protected final Init appInit = new Init();

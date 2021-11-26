@@ -198,6 +198,10 @@ public class BookingDAO {
             );
 
         }
+
+        for (Booking b : this.publicBookingList) {
+            System.out.println(b.toString());
+        }
     }
 
 }
