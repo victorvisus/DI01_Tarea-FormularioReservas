@@ -26,6 +26,7 @@ public class CtrlInit implements ActionListener {
      * Constructor en el que se inician las "escuchas" a los botones del panel
      */
     public CtrlInit() {
+
         /* Listener para opciones de menú */
 //        this.appInit.navItemBooking.addActionListener(this);
 //        this.appInit.navItemBookingList.addActionListener(this);
@@ -36,19 +37,18 @@ public class CtrlInit implements ActionListener {
         this.appInit.btnBookingList.addActionListener(this);
         this.appInit.btnExit.addActionListener(this);
 
-        this.publicBookingList.add(new Workshop("Victor", new Date(), 5, "Bufé"));
-        this.publicBookingList.add(new Banquet("Jeny", new Date(), 7, "Carta"));
-        this.publicBookingList.add(new Workshop("Angel", new Date(), 15, "No precisa"));
     }
 
     /**
      * Arranca el panel de inicio
      */
     public void appRun() {
+
         appInit.setVisible(true);
 
         appInit.setTitle("CypherBookingSystem");
         appInit.setLocationRelativeTo(null);
+
     }
 
     /**

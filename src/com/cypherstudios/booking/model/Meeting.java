@@ -99,6 +99,10 @@ public class Meeting extends Booking {
         this.hosting = hosting;
     }
 
+    public HostingRoom getHostingRoom() {
+        return rooms;
+    }
+
     @Override
     public String toString() {
         String roomsData;

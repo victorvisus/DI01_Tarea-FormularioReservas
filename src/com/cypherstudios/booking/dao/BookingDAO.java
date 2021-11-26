@@ -153,8 +153,8 @@ public class BookingDAO {
     }
 
     private void cleanForm(BookingDialog bookingWindow) {
-//        JOptionPane.showMessageDialog(null, "Código no implementado todavía, tiene que limpiar el formulario",
-//                "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
+        //JOptionPane.showMessageDialog(null, "Código no implementado todavía, tiene que limpiar el formulario",
+        //  "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
 
         bookingWindow.txtCustomerName.setText(null);
         bookingWindow.cbEventType.setSelectedIndex(0);
@@ -167,10 +167,22 @@ public class BookingDAO {
      * ************************************************** LISTAR RESERVAS ***
      */
     public void tableBookinList(JTable jtBookingList) {
-        System.out.println("Has entrado al metodo");
+
+        /* Creo objetos de ejemplo */
+        System.out.println("Añadido Victor - Workshop");
+        this.publicBookingList.add(new Workshop("Victor", new Date(), 5, "Bufé"));
+        System.out.println("Añadido Jeny - Banquet");
+        this.publicBookingList.add(new Banquet("Jeny", new Date(), 7, "Carta"));
+        System.out.println("Añadido Angel - Workshop");
+        this.publicBookingList.add(new Workshop("Angel", new Date(), 15, "No precisa"));
+        System.out.println("Añadido Luis - Meeting");
+        this.publicBookingList.add(new Meeting("Luis", new Date(), 20, "No precisa", 5, 'Y', 3, 2));
+
+        //System.out.println("Has entrado al metodo");
         DefaultTableModel bookingTable = new DefaultTableModel();
         jtBookingList.setModel(bookingTable);
 
+        bookingTable.addColumn("Tipo");
         bookingTable.addColumn("Nombre");
         bookingTable.addColumn("Fecha");
         bookingTable.addColumn("Asistentes");
@@ -185,22 +197,42 @@ public class BookingDAO {
             jtBookingList.getColumnModel().getColumn(y).setPreferredWidth(20);
         }
 
-        for (int i = 0; i < this.publicBookingList.size(); i++) {
+        Object[] ob = null;
+        for (int x = 0; x < this.publicBookingList.size(); x++) {
 
-            Object[] rows = new Object[numColumns];
+            bookingTable.addRow(ob);
 
-            bookingTable.addRow(
-                    new Object[]{
-                        this.publicBookingList.get(i).getCustomerName(),
-                        this.publicBookingList.get(i).getReservationString(),
-                        this.publicBookingList.get(i).getAttendees(),
-                        this.publicBookingList.get(i).getTypeCuisine(),}
-            );
+            Booking getBooking = (Booking) publicBookingList.get(x);
 
+            bookingTable.setValueAt(getBooking.getCustomerName(), x, 1);
+            bookingTable.setValueAt(getBooking.getReservation(), x, 2);
+            bookingTable.setValueAt(getBooking.getAttendees(), x, 3);
+            bookingTable.setValueAt(getBooking.getTypeCuisine(), x, 4);
+
+            if (getBooking instanceof Workshop) {
+                bookingTable.setValueAt(((Workshop) getBooking).getEventType(), x, 0);
+            }
+            if (getBooking instanceof Banquet) {
+                bookingTable.setValueAt(((Banquet) getBooking).getEventType(), x, 0);
+            }
+            if (getBooking instanceof Meeting) {
+                bookingTable.setValueAt(((Meeting) getBooking).getEventType(), x, 0);
+                bookingTable.setValueAt(((Meeting) getBooking).getJourneys(), x, 5);
+                bookingTable.setValueAt(((Meeting) getBooking).getHostingRoom().getNumRooms(), x, 6);
+                bookingTable.setValueAt(((Meeting) getBooking).getHostingRoom().getNumDays(), x, 7);
+            } else {
+                bookingTable.setValueAt("No", x, 5);
+                bookingTable.setValueAt("No", x, 6);
+                bookingTable.setValueAt("No", x, 7);
+            }
         }
 
-        for (Booking b : this.publicBookingList) {
-            System.out.println(b.toString());
+        if (!this.publicBookingList.isEmpty()) {
+            for (Booking b : this.publicBookingList) {
+                System.out.println(b.toString());
+            }
+        } else {
+            System.out.println("No existen reservas");
         }
     }
 
