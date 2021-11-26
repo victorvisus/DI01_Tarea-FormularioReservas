@@ -19,10 +19,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class BookingDAO {
 
-    private ArrayList<Booking> publicBookingList = new ArrayList();
+    //private ArrayList<Booking> publicBookingList = new ArrayList();
 
-    public BookingDAO(ArrayList<Booking> publicBookingList) {
-        this.publicBookingList = publicBookingList;
+    public BookingDAO() {
+        //this.publicBookingList = publicBookingList;
     }
 
     /**
@@ -35,19 +35,33 @@ public class BookingDAO {
      * @return : devuelve el ArrayList modificado (siempre)
      */
     public ArrayList<Booking> saveBooking(BookingDialog bookingWindow,
-            Booking reservation) {
+            Booking reservation, ArrayList<Booking> publicBookingList) {
 
         try {
-            this.publicBookingList.add(actionBtnSaveBooking(bookingWindow, reservation));
+            publicBookingList.add(actionBtnSaveBooking(bookingWindow, reservation));
+
+            for (Booking b : publicBookingList) {
+                System.out.println(b.toString());
+            }
+
         } catch (BookingExceptions ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),
                     "Reserva de evento", JOptionPane.ERROR_MESSAGE);
         }
 
-        return this.publicBookingList;
+        return publicBookingList;
     }
 
     /**
+     * Recoge los datos del formulario para crear la reserva
+     *
+     * Este método lo podría dividir en 3:
+     * <ul>
+     * <li>El primero evalua el tipo de objeto necesario para el evento.
+     * Dependiendo del resultado llama a un método u a otro</li>
+     * <li>Otro método si la reserva es un "Congreso"</li>
+     * <li>Otro método si la reserva es un "Banquete" o una "Jornada"</li>
+     * </ul>
      *
      * @param bookingWindow
      * @param reservation
@@ -166,17 +180,17 @@ public class BookingDAO {
     /*
      * ************************************************** LISTAR RESERVAS ***
      */
-    public void tableBookinList(JTable jtBookingList) {
+    public ArrayList<Booking> tableBookinList(JTable jtBookingList, ArrayList<Booking> publicBookingList) {
 
         /* Creo objetos de ejemplo */
-        System.out.println("Añadido Victor - Workshop");
-        this.publicBookingList.add(new Workshop("Victor", new Date(), 5, "Bufé"));
-        System.out.println("Añadido Jeny - Banquet");
-        this.publicBookingList.add(new Banquet("Jeny", new Date(), 7, "Carta"));
-        System.out.println("Añadido Angel - Workshop");
-        this.publicBookingList.add(new Workshop("Angel", new Date(), 15, "No precisa"));
-        System.out.println("Añadido Luis - Meeting");
-        this.publicBookingList.add(new Meeting("Luis", new Date(), 20, "No precisa", 5, 'Y', 3, 2));
+        //System.out.println("Añadido Victor - Workshop");
+//        publicBookingList.add(new Workshop("Victor", new Date(), 5, "Bufé"));
+        //System.out.println("Añadido Jeny - Banquet");
+//        publicBookingList.add(new Banquet("Jeny", new Date(), 7, "Carta"));
+        //System.out.println("Añadido Angel - Workshop");
+//        publicBookingList.add(new Workshop("Angel", new Date(), 15, "No precisa"));
+        //System.out.println("Añadido Luis - Meeting");
+//        publicBookingList.add(new Meeting("Luis", new Date(), 20, "No precisa", 5, 'Y', 3, 2));
 
         //System.out.println("Has entrado al metodo");
         DefaultTableModel bookingTable = new DefaultTableModel();
@@ -198,14 +212,14 @@ public class BookingDAO {
         }
 
         Object[] ob = null;
-        for (int x = 0; x < this.publicBookingList.size(); x++) {
+        for (int x = 0; x < publicBookingList.size(); x++) {
 
             bookingTable.addRow(ob);
 
             Booking getBooking = (Booking) publicBookingList.get(x);
 
             bookingTable.setValueAt(getBooking.getCustomerName(), x, 1);
-            bookingTable.setValueAt(getBooking.getReservation(), x, 2);
+            bookingTable.setValueAt(getBooking.getReservationString(), x, 2);
             bookingTable.setValueAt(getBooking.getAttendees(), x, 3);
             bookingTable.setValueAt(getBooking.getTypeCuisine(), x, 4);
 
@@ -227,13 +241,14 @@ public class BookingDAO {
             }
         }
 
-        if (!this.publicBookingList.isEmpty()) {
-            for (Booking b : this.publicBookingList) {
+        if (!publicBookingList.isEmpty()) {
+            for (Booking b : publicBookingList) {
                 System.out.println(b.toString());
             }
         } else {
             System.out.println("No existen reservas");
         }
+        return publicBookingList;
     }
 
 }

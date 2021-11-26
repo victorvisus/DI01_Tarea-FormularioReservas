@@ -67,7 +67,7 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
             Booking reservation = null;
 
             //Llama al método que se encarga de realizar la operación
-            op.saveBooking(bookingWindow, reservation);
+            op.saveBooking(bookingWindow, reservation, publicBookingList);
 
         }
         if (e.getSource() == bookingWindow.navItemBookingList) {

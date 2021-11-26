@@ -52,8 +52,8 @@ public class CtrlBookingList extends CtrlInit {
         }
         /* Botón listar las Reservas */
         if (e.getSource() == bookingListWindows.btnBookingList) {
-            System.out.println("Has presionado el boton");
-            op.tableBookinList(bookingListWindows.jtBookingList);
+            //System.out.println("Has presionado el boton");
+            op.tableBookinList(bookingListWindows.jtBookingList, publicBookingList);
         }
     }
 
