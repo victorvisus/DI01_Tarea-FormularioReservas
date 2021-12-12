@@ -1,15 +1,10 @@
 package com.cypherstudios.booking.dao;
 
 import com.cypherstudios.booking.exceptions.BookingExceptions;
-import com.cypherstudios.booking.model.Banquet;
-import com.cypherstudios.booking.model.Booking;
-import com.cypherstudios.booking.model.Meeting;
-import com.cypherstudios.booking.model.Workshop;
+import com.cypherstudios.booking.model.*;
 import com.cypherstudios.booking.view.BookingDialog;
 import java.util.Date;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,35 +15,26 @@ public class BookingDAO {
 
     /**
      * Constructor
-     *
-     * @param publicBookingList
      */
     public BookingDAO() {
-        //  this.publicBookingList = publicBookingList;
     }
 
+    /**
+     * ********************************************** GUARDAR RESERVAS
+     * *************************************************************************
+     */
     /**
      * Guarda en el ArrayList la reserva, que manda a gestionar al método
      * actionBtnSaveBooking
      *
      * @param bookingWindow
-     * @param reservation
+     * @param publicBookingList
+     * @return
      */
     public BookingsArrayList saveBooking(BookingDialog bookingWindow, BookingsArrayList publicBookingList) {
-
-//        System.out.println("\nMétodo: saveBooking" + "\nANTES de entrar al try/catch\n");
-//        for (Booking b : publicBookingList) {
-//            System.out.println(b.toString());
-//        }
         try {
-            //Booking reservation = null;
-
             publicBookingList.attach(actionBtnSaveBooking(bookingWindow));
 
-//            System.out.println("\n\nMétodo: saveBooking" + "\nDESPUÉS de entrar al try/catch\n");
-//            for (int i = 0; i < publicBookingList.bookingCount(); i++) {
-//                System.out.println(publicBookingList.getBooking(i).toString());
-//            }
         } catch (BookingExceptions ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),
                     "Reserva de evento", JOptionPane.ERROR_MESSAGE);
@@ -112,32 +98,23 @@ public class BookingDAO {
             JOptionPane.showMessageDialog(null, "Reserva registrado correctamente",
                     "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
 
-            System.out.println(reservation.toString());
-
             //Establece valores por defecto en el formulario
             cleanForm(bookingWindow);
+
         } else if (dataEvaluate(bookingWindow.cbEventType, "Banquete")) {
             reservation = new Banquet();
 
             reservation.setCustomerName(bookingWindow.txtCustomerName.getText());
-//            System.out.println(reservation.getCustomerName());
-
             reservation.setReservation((Date) bookingWindow.dateReservation.getValue());
-//            System.out.println(reservation.getReservation());
-
             reservation.setAttendees((int) bookingWindow.spAttendees.getValue());
-//            System.out.println(reservation.getAttendees());
-
             reservation.setTypeCuisine((String) bookingWindow.cbTypeCuisine.getSelectedItem());
-//            System.out.println(reservation.getTypeCuisine());
 
             JOptionPane.showMessageDialog(null, "Reserva registrado correctamente",
                     "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
 
-            System.out.println(reservation.toString());
-
             //Establece valores por defecto en el formulario
             cleanForm(bookingWindow);
+
         } else if (dataEvaluate(bookingWindow.cbEventType, "Jornada")) {
             reservation = new Workshop();
 
@@ -149,8 +126,6 @@ public class BookingDAO {
             JOptionPane.showMessageDialog(null, "Reserva registrado correctamente",
                     "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
 
-            System.out.println(reservation.toString());
-
             //Establece valores por defecto en el formulario
             cleanForm(bookingWindow);
         } else {
@@ -160,40 +135,17 @@ public class BookingDAO {
         return reservation;
     }
 
-    private void cleanForm(BookingDialog bookingWindow) {
-        //JOptionPane.showMessageDialog(null, "Código no implementado todavía, tiene que limpiar el formulario",
-        //  "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
-
-        bookingWindow.txtCustomerName.setText(null);
-        bookingWindow.cbEventType.setSelectedIndex(0);
-        bookingWindow.cbTypeCuisine.setSelectedIndex(0);
-        bookingWindow.rbtnHostingNo.setSelected(false);
-        bookingWindow.rbtnHostingYes.setSelected(false);
-    }
-
-    /*
-     * ************************************************** LISTAR RESERVAS ***
+    /**
+     * ********************************************** LISTAR RESERVAS
+     * *************************************************************************
      */
     public void tableBookinList(JTable jtBookingList, BookingsArrayList publicBookingList) {
 
-        /* Creo objetos de ejemplo */
-//        System.out.println("Añadido Victor - Workshop");
-//        publicBookingList.attach(new Workshop("Victor", new Date(), 5, "Bufé"));
-//        System.out.println("Añadido Jeny - Banquet");
-//        publicBookingList.attach(new Banquet("Jeny", new Date(), 7, "Carta"));
-//        System.out.println("Añadido Angel - Workshop");
-//        publicBookingList.attach(new Workshop("Angel", new Date(), 15, "No precisa"));
-//        System.out.println("Añadido Luis - Meeting");
-//        publicBookingList.attach(new Meeting("Luis", new Date(), 20, "No precisa", 5, 'Y', 3, 2));
-//        System.out.println("Has entrado al metodo");
-        /**
-         * Evalua que el arralist no este vacio
-         */
         DefaultTableModel bookingTable = new DefaultTableModel();
         jtBookingList.setModel(bookingTable);
 
         try {
-            existBooking(publicBookingList);
+            existBooking(publicBookingList); //Evalua que el arralist no este vacio
 
             bookingTable.addColumn("Tipo");//0
             bookingTable.addColumn("Nombre");//1
@@ -211,59 +163,85 @@ public class BookingDAO {
             }
 
             Object[] fila = new Object[numColumns];
-            //System.out.println(publicBookingList.bookingCount());
+
             for (int x = 0; x < publicBookingList.bookingCount(); x++) {
 
-                //Agregamos al modelo los resultados
+                //Agregamos al modelo una fila
                 bookingTable.addRow(fila);
 
+                /* Instancia el objeto Booking del que va a extraer los datos
+                para mostrarlos en las columnas de la fila, en la tabla */
                 Booking getBooking = (Booking) publicBookingList.getBooking(x);
 
-                int numRow = x;
-                if (getBooking instanceof Workshop) {
-                    bookingTable.setValueAt(((Workshop) getBooking).getEventType(), numRow, 0);
-
-                    bookingTable.setValueAt(((Workshop) getBooking).getCustomerName(), numRow, 1);
-                    bookingTable.setValueAt(((Workshop) getBooking).getReservationString(), numRow, 2);
-                    bookingTable.setValueAt(((Workshop) getBooking).getAttendees(), numRow, 3);
-                    bookingTable.setValueAt(((Workshop) getBooking).getTypeCuisine(), numRow, 4);
-
-                    bookingTable.setValueAt("No", x, 5);
-                    bookingTable.setValueAt("No", x, 6);
-                    bookingTable.setValueAt("No", x, 7);
-                }
-                if (getBooking instanceof Banquet) {
-                    bookingTable.setValueAt(((Banquet) getBooking).getEventType(), numRow, 0);
-
-                    bookingTable.setValueAt(((Banquet) getBooking).getCustomerName(), numRow, 1);
-                    bookingTable.setValueAt(((Banquet) getBooking).getReservationString(), numRow, 2);
-                    bookingTable.setValueAt(((Banquet) getBooking).getAttendees(), numRow, 3);
-                    bookingTable.setValueAt(((Banquet) getBooking).getTypeCuisine(), numRow, 4);
-
-                    bookingTable.setValueAt("No", numRow, 5);
-                    bookingTable.setValueAt("No", numRow, 6);
-                    bookingTable.setValueAt("No", numRow, 7);
-                }
-                if (getBooking instanceof Meeting) {
-                    bookingTable.setValueAt(((Meeting) getBooking).getEventType(), numRow, 0);
-
-                    bookingTable.setValueAt(((Meeting) getBooking).getCustomerName(), numRow, 1);
-                    bookingTable.setValueAt(((Meeting) getBooking).getReservationString(), numRow, 2);
-                    bookingTable.setValueAt(((Meeting) getBooking).getAttendees(), numRow, 3);
-                    bookingTable.setValueAt(((Meeting) getBooking).getTypeCuisine(), numRow, 4);
-
-                    bookingTable.setValueAt(((Meeting) getBooking).getJourneys(), numRow, 5);
-                    bookingTable.setValueAt(((Meeting) getBooking).getHostingRoom().getNumRooms(), numRow, 6);
-                    bookingTable.setValueAt(((Meeting) getBooking).getHostingRoom().getNumDays(), numRow, 7);
-                }
+                //Manda a rellenar las columnas de la fila
+                fillColumns(bookingTable, x, getBooking);
 
             }
         } catch (BookingExceptions ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),
                     "Listar Reservas de evento", JOptionPane.ERROR_MESSAGE);
         }
+    }
 
-        //return publicBookingList;
+    /**
+     * ********************************************** MÉTODOS AUXILIARIES
+     * *************************************************************************
+     */
+    /**
+     * Limpia los campos del formulario una vez realizada la reserva
+     *
+     * @param bookingWindow
+     */
+    private void cleanForm(BookingDialog bookingWindow) {
+        bookingWindow.txtCustomerName.setText(null);
+        bookingWindow.cbEventType.setSelectedIndex(0);
+        bookingWindow.cbTypeCuisine.setSelectedIndex(0);
+        bookingWindow.rbtnHostingNo.setSelected(false);
+        bookingWindow.rbtnHostingYes.setSelected(false);
+    }
+
+    /**
+     * Extrae los atributos del objeto para mostrarlos en la tabla
+     *
+     * @param bookingTable : El modelo de la tabla
+     * @param x : int la posición del bucle for en la que se encuentra
+     * @param getBooking : el objeto Booking reserva
+     * @throws BookingExceptions : si el objeto no pertenece a ninguno de los
+     * tres tipos existentes lanza un error
+     */
+    private void fillColumns(DefaultTableModel bookingTable, int x, Booking getBooking) throws BookingExceptions {
+        //Extrae los datos "básico" de la reserva
+        bookingTable.setValueAt(getBooking.getCustomerName(), x, 1);
+        bookingTable.setValueAt(getBooking.getReservationString(), x, 2);
+        bookingTable.setValueAt(getBooking.getAttendees(), x, 3);
+        bookingTable.setValueAt(getBooking.getTypeCuisine(), x, 4);
+
+        // Evalua de que tipo de reserva es el objeto Booking
+        switch (valueBookingType(getBooking)) {
+            case 1:
+                bookingTable.setValueAt(((Workshop) getBooking).getEventType(), x, 0);
+
+                bookingTable.setValueAt(1, x, 5);
+                bookingTable.setValueAt(0, x, 6);
+                bookingTable.setValueAt(0, x, 7);
+                break;
+            case 2:
+                bookingTable.setValueAt(((Banquet) getBooking).getEventType(), x, 0);
+
+                bookingTable.setValueAt(1, x, 5);
+                bookingTable.setValueAt(0, x, 6);
+                bookingTable.setValueAt(0, x, 7);
+                break;
+            case 3:
+                bookingTable.setValueAt(((Meeting) getBooking).getEventType(), x, 0);
+
+                bookingTable.setValueAt(((Meeting) getBooking).getJourneys(), x, 5);
+                bookingTable.setValueAt(((Meeting) getBooking).getHostingRoom().getNumRooms(), x, 6);
+                bookingTable.setValueAt(((Meeting) getBooking).getHostingRoom().getNumDays(), x, 7);
+                break;
+            default:
+                throw new BookingExceptions(7);
+        }
     }
 
     /* *************************************************** COMPROBACIONES **** */
@@ -318,4 +296,22 @@ public class BookingDAO {
         return false;
     }
 
+    /**
+     * Evalua el tipo de evento, dependiendo de si es Banquete, Jornada o
+     * Congreso devuelve un valor u otro, para el switch
+     *
+     * @param getBooking : Objeto reserva Booking
+     * @return valor case
+     */
+    private int valueBookingType(Booking getBooking) {
+        if (getBooking instanceof Workshop) {
+            return 1;
+        } else if (getBooking instanceof Banquet) {
+            return 2;
+        } else if (getBooking instanceof Meeting) {
+            return 3;
+        } else {
+            return 0;
+        }
+    }
 }

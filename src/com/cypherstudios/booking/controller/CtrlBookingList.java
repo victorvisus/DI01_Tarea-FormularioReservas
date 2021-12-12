@@ -6,8 +6,10 @@
 package com.cypherstudios.booking.controller;
 
 import com.cypherstudios.booking.dao.BookingsArrayList;
+import com.cypherstudios.booking.model.*;
 import com.cypherstudios.booking.view.BookingList;
 import java.awt.event.ActionEvent;
+import java.util.Date;
 
 /**
  *
@@ -58,23 +60,24 @@ public class CtrlBookingList extends CtrlInit {
         /* Botón listar las Reservas */
         if (e.getSource() == bookingListWindows.btnBookingList) {
 
-//            System.out.println("\nANTES DE LISTAR LAS RESERVAS\n");
-//            for (int i = 0; i < publicBookingList.bookingCount(); i++) {
-//                System.out.println(publicBookingList.getBooking(i));
-//            }
-            /* Creo objetos de ejemplo */
-//            System.out.println("Añadido Victor - Workshop");
-//            publicBookingList.attach(new Workshop("Victor", new Date(), 5, "Bufé"));
-//            System.out.println("Añadido Jeny - Banquet");
-//            publicBookingList.attach(new Banquet("Jeny", new Date(), 7, "Carta"));
-//            System.out.println("Añadido Angel - Workshop");
-//            publicBookingList.attach(new Workshop("Angel", new Date(), 15, "No precisa"));
-//            System.out.println("Añadido Luis - Meeting");
-//            publicBookingList.attach(new Meeting("Luis", new Date(), 20, "No precisa", 5, 'Y', 3, 2));
+            addExamples(); //Creo objetos de ejemplo
 
-            //System.out.println("Has presionado el boton");
             op.tableBookinList(bookingListWindows.jtBookingList, publicBookingList);
         }
     }
 
+    /**
+     * Añade datos de ejemplo al ArrayList para hacer las pruebas
+     */
+    private void addExamples() {
+        System.out.println("Añadido Victor - Workshop");
+        publicBookingList.attach(new Workshop("Victor", new Date(), 5, "Bufé"));
+        System.out.println("Añadido Jeny - Banquet");
+        publicBookingList.attach(new Banquet("Jeny", new Date(), 7, "Carta"));
+        System.out.println("Añadido Angel - Workshop");
+        publicBookingList.attach(new Workshop("Angel", new Date(), 15, "No precisa"));
+        System.out.println("Añadido Luis - Meeting");
+        publicBookingList.attach(new Meeting("Luis", new Date(), 20, "No precisa", 5, 'Y', 3, 2));
+
+    }
 }

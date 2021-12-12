@@ -52,6 +52,10 @@ public class BookingExceptions extends Exception {
                 //El objeto reserva es nulo
                 errorMsg = "La reservas no es correcta";
                 break;
+            case 7:
+                //El objeto reserva es nulo
+                errorMsg = "Error al listar la reserva";
+                break;
             default:
                 errorMsg = "Error de ejecución";
                 break;
