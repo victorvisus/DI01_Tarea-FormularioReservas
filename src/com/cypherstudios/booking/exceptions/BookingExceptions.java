@@ -44,6 +44,14 @@ public class BookingExceptions extends Exception {
                 //No se ha seleccionado una opción en el JComboBox
                 errorMsg = "¿Necesitas reservar habitaciones en el hotel?";
                 break;
+            case 5:
+                //No existen reservas
+                errorMsg = "No existen reservas";
+                break;
+            case 6:
+                //El objeto reserva es nulo
+                errorMsg = "La reservas no es correcta";
+                break;
             default:
                 errorMsg = "Error de ejecución";
                 break;

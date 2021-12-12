@@ -1,12 +1,10 @@
 package com.cypherstudios.booking.controller;
 
 import com.cypherstudios.booking.dao.BookingDAO;
-import com.cypherstudios.booking.model.*;
+import com.cypherstudios.booking.dao.BookingsArrayList;
 import com.cypherstudios.booking.view.appIni;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -15,9 +13,12 @@ import java.util.Date;
 public class CtrlInit implements ActionListener {
 
     //Inicializa un atributo con el ArrayList
-    protected ArrayList<Booking> publicBookingList = new ArrayList();
+    private BookingsArrayList publicBookingList = new BookingsArrayList();
     //Instancia un Objeto de la clase que gestiona los datos y le envia el ArrayList
     protected final BookingDAO op = new BookingDAO();
+
+//    //Instancia la clase que contiene el ArrayList
+//    protected BookingsArrayList re = new BookingsArrayList();
 
     //protected final Init appInit = new Init();
     protected final appIni appInit = new appIni();
@@ -66,8 +67,9 @@ public class CtrlInit implements ActionListener {
         if (e.getSource() == appInit.btnBooking) {
             //Crea una instancia del controller del JDialog de reservas: CtrlBooking
             CtrlBooking openBooking = new CtrlBooking();
+
             //Lanza el JDialog
-            openBooking.runBooking();
+            openBooking.runBooking(publicBookingList);
 
         }
         // Abre el panel donde se listan las reservas "guardadas"
@@ -75,7 +77,7 @@ public class CtrlInit implements ActionListener {
             //Crea una instancia del controller CtrflBookingList
             CtrlBookingList openList = new CtrlBookingList();
             //Iniciar el JDialog BookingList
-            openList.runListWindow();
+            openList.runListWindow(publicBookingList);
         }
     }
 

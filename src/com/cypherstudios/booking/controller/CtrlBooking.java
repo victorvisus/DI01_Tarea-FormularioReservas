@@ -1,6 +1,6 @@
 package com.cypherstudios.booking.controller;
 
-import com.cypherstudios.booking.model.*;
+import com.cypherstudios.booking.dao.BookingsArrayList;
 import com.cypherstudios.booking.view.BookingDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,6 +26,8 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
 
     private final BookingDialog bookingWindow = new BookingDialog(appInit, true);
 
+    private BookingsArrayList publicBookingList;
+
     public CtrlBooking() {
         /* Listener para opciones de menú */
         this.bookingWindow.navItemSaveBooking.addActionListener(this);
@@ -41,8 +43,13 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
     /**
      * Lanza la ventana de dialogo
      */
-    public void runBooking() {
+    public BookingsArrayList runBooking(BookingsArrayList publicBookingList) {
+
+        this.publicBookingList = publicBookingList;
+
         bookingWindow.setVisible(true);
+
+        return publicBookingList;
     }
 
     /**
@@ -63,18 +70,23 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
             this.bookingWindow.setVisible(false);
         }
         if (e.getSource() == bookingWindow.btnSaveBooking || e.getSource() == bookingWindow.navItemSaveBooking) {
-            //Crea el objeto Booking
-            Booking reservation = null;
 
             //Llama al método que se encarga de realizar la operación
-            op.saveBooking(bookingWindow, reservation, publicBookingList);
+            op.saveBooking(bookingWindow, publicBookingList);
 
+            //Cierro el modal
+            this.bookingWindow.setVisible(false);
+
+//            System.out.println("\nDESPUÉS DE GUARDAR LA RESERVA\n");
+//            for (int i = 0; i < publicBookingList.bookingCount(); i++) {
+//                System.out.println(publicBookingList.getBooking(i));
+//            }
         }
         if (e.getSource() == bookingWindow.navItemBookingList) {
             //Crea una instancia del controller CtrflBookingList
             CtrlBookingList openList = new CtrlBookingList();
             //Iniciar el JDialog BookingList
-            openList.runListWindow();
+            openList.runListWindow(publicBookingList);
 
         }
     }

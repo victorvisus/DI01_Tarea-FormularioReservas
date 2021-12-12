@@ -5,6 +5,7 @@
  */
 package com.cypherstudios.booking.controller;
 
+import com.cypherstudios.booking.dao.BookingsArrayList;
 import com.cypherstudios.booking.view.BookingList;
 import java.awt.event.ActionEvent;
 
@@ -15,6 +16,8 @@ import java.awt.event.ActionEvent;
 public class CtrlBookingList extends CtrlInit {
 
     private final BookingList bookingListWindows = new BookingList(appInit, true);
+
+    private BookingsArrayList publicBookingList;
 
     public CtrlBookingList() {
         /* Listener para opciones de menú */
@@ -29,7 +32,9 @@ public class CtrlBookingList extends CtrlInit {
     /**
      * Lanza la ventana de dialogo
      */
-    public void runListWindow() {
+    public void runListWindow(BookingsArrayList publicBookingList) {
+        this.publicBookingList = publicBookingList;
+
         bookingListWindows.setVisible(true);
     }
 
@@ -52,6 +57,21 @@ public class CtrlBookingList extends CtrlInit {
         }
         /* Botón listar las Reservas */
         if (e.getSource() == bookingListWindows.btnBookingList) {
+
+//            System.out.println("\nANTES DE LISTAR LAS RESERVAS\n");
+//            for (int i = 0; i < publicBookingList.bookingCount(); i++) {
+//                System.out.println(publicBookingList.getBooking(i));
+//            }
+            /* Creo objetos de ejemplo */
+//            System.out.println("Añadido Victor - Workshop");
+//            publicBookingList.attach(new Workshop("Victor", new Date(), 5, "Bufé"));
+//            System.out.println("Añadido Jeny - Banquet");
+//            publicBookingList.attach(new Banquet("Jeny", new Date(), 7, "Carta"));
+//            System.out.println("Añadido Angel - Workshop");
+//            publicBookingList.attach(new Workshop("Angel", new Date(), 15, "No precisa"));
+//            System.out.println("Añadido Luis - Meeting");
+//            publicBookingList.attach(new Meeting("Luis", new Date(), 20, "No precisa", 5, 'Y', 3, 2));
+
             //System.out.println("Has presionado el boton");
             op.tableBookinList(bookingListWindows.jtBookingList, publicBookingList);
         }
