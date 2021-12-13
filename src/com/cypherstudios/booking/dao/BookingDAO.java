@@ -240,7 +240,12 @@ public class BookingDAO {
                 bookingTable.setValueAt(((Meeting) getBooking).getHostingRoom().getNumDays(), x, 7);
                 break;
             default:
-                throw new BookingExceptions(7);
+                //throw new BookingExceptions(7);
+
+                for (int z = 0; z < bookingTable.getColumnCount(); z++) {
+                    bookingTable.setValueAt("error", x, z);
+                }
+                break;
         }
     }
 
@@ -271,7 +276,6 @@ public class BookingDAO {
      * @throws BookingExceptions
      */
     private boolean validReservation(Booking reservation) throws BookingExceptions {
-
         if (reservation == null) {
             throw new BookingExceptions(6);
         } else if (reservation != null) {
@@ -287,7 +291,6 @@ public class BookingDAO {
      * @throws BookingExceptions
      */
     private boolean existBooking(BookingsArrayList publicBookingList) throws BookingExceptions {
-
         if (publicBookingList.bookingCount() == 0) {
             throw new BookingExceptions(5);
         } else if (publicBookingList.bookingCount() != 0) {
@@ -303,7 +306,7 @@ public class BookingDAO {
      * @param getBooking : Objeto reserva Booking
      * @return valor case
      */
-    private int valueBookingType(Booking getBooking) {
+    private int valueBookingType(Booking getBooking) throws BookingExceptions {
         if (getBooking instanceof Workshop) {
             return 1;
         } else if (getBooking instanceof Banquet) {
@@ -311,7 +314,8 @@ public class BookingDAO {
         } else if (getBooking instanceof Meeting) {
             return 3;
         } else {
-            return 0;
+            throw new BookingExceptions(7);
+            //return 0;
         }
     }
 }

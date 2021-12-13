@@ -20,6 +20,14 @@ public class BookingExceptions extends Exception {
      * <ul>
      * <li>case 1: Congreso - No se han introducido datos referentes al Hotel
      * pero se ha indicado que es necesario.</li>
+     * <li>case 2: Se ha producido un error al guardar la reserva.</li>
+     * <li>case 3: No se ha seleccionado el tipo de evento.</li>
+     * <li>case 4: No se ha introducido información sobre la reserva de
+     * habitaciones.</li>
+     * <li>case 5: El ArrayList de reservas esta vacio.</li>
+     * <li>case 6: El objeto Booking reserva es null, esta vacio.</li>
+     * <li>case 7: El objeto Booking reserva, extraido del ArrayList de
+     * reservas, no coincide con ningún tipo de reserva establecido.</li>
      * </ul>
      */
     public String getMessage() {
@@ -53,14 +61,14 @@ public class BookingExceptions extends Exception {
                 errorMsg = "La reservas no es correcta";
                 break;
             case 7:
-                //El objeto reserva es nulo
+                //El objeto reserva no coincide con ningún tipo de reserva establecido
                 errorMsg = "Error al listar la reserva";
                 break;
             default:
+                //Cualquier otro error no establecido en este switch
                 errorMsg = "Error de ejecución";
                 break;
         }
-
         return errorMsg;
     }
 

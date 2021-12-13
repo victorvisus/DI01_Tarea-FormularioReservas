@@ -54,6 +54,14 @@ public class HostingRoom {
                 + "\nNº de habitaciones: " + numRooms;
     }
 
+    /**
+     * Evalua que los datos referentes a la reserva de habitaciones son
+     * correctos, distintos de 0
+     *
+     * @param numDays
+     * @param numRooms
+     * @throws BookingExceptions
+     */
     public static void evaluateRoomsData(int numDays, int numRooms) throws BookingExceptions {
         if (numDays == 0 || numRooms == 0) {
             throw new BookingExceptions(1);

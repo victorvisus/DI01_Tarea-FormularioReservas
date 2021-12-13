@@ -29,6 +29,6 @@ public class Banquet extends Booking {
 
     @Override
     public int compareTo(Booking b) {
-        throw new UnsupportedOperationException("Método compareTo no implementado."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Método compareTo no implementado.");
     }
 }

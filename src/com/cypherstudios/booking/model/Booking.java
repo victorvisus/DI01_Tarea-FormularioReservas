@@ -11,7 +11,6 @@ import java.util.Date;
  */
 public abstract class Booking implements Comparable<Booking> {
 
-    //public static final String[] cuisine = new String[]{"Bufé", "Carta", "Pedir cita con el chef", "No precisa"};
     protected String customerName;
     protected Date reservation;
     protected int attendees;
@@ -32,6 +31,7 @@ public abstract class Booking implements Comparable<Booking> {
     public String getCustomerName() {
         return this.customerName;
     }
+
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
@@ -39,6 +39,12 @@ public abstract class Booking implements Comparable<Booking> {
     public Date getReservation() {
         return this.reservation;
     }
+
+    /**
+     * Formatea la fecha a un estilo más legible
+     *
+     * @return
+     */
     public String getReservationString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -52,6 +58,7 @@ public abstract class Booking implements Comparable<Booking> {
     public int getAttendees() {
         return this.attendees;
     }
+
     public void setAttendees(int attendees) {
         this.attendees = attendees;
     }
@@ -59,6 +66,7 @@ public abstract class Booking implements Comparable<Booking> {
     public String getTypeCuisine() {
         return this.typeCuisine;
     }
+
     public void setTypeCuisine(String typeCuisine) {
         this.typeCuisine = typeCuisine;
     }

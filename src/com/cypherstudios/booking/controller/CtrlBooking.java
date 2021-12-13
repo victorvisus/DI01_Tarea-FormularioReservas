@@ -9,18 +9,7 @@ import java.awt.event.ActionListener;
  * Clase controlador para el JDialog que se encarga de solicitar los datos
  * necesarios para realizar la reserva.
  *
- * <ul><strong>Atributos de la Class HEREDADOS:</strong>
- * <li>ArrayList de Objetos "Reserva" donde se almacenaran las reservas
- * realizadas</li>
- * <li>appInit: Instancia de la clase JFrame Init</li>
- * </ul>
- *
- * <ul><strong>Atributos de la Class PROPIOS:</strong>
- * <li>bookingWindow: instancia del JDialog BookingDialog</li>
- * <li>Objeto Reserva --> Todos los necesarios para completar la reserva</li>
- * </ul>
- *
- * @author Victor
+ * @author Victor Visús García
  */
 public class CtrlBooking extends CtrlInit implements ActionListener {
 
@@ -42,6 +31,9 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
 
     /**
      * Lanza la ventana de dialogo
+     *
+     * @param publicBookingList : recibe el ArrayList de reservas
+     * @return Array
      */
     public BookingsArrayList runBooking(BookingsArrayList publicBookingList) {
 

@@ -123,11 +123,12 @@ public class Meeting extends Booking {
 
     @Override
     public int compareTo(Booking b) {
-        throw new UnsupportedOperationException("Método compareTo no implementado."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Método compareTo no implementado.");
     }
 
     /**
-     * Crea el objeto HostingRooms
+     * Crea el objeto HostingRooms, enviandole los datos necesarios, referentes
+     * a la reserva de hotel
      *
      * @param numDays
      * @param numRooms
