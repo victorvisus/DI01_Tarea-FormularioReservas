@@ -13,9 +13,13 @@ import java.awt.event.ActionListener;
  */
 public class CtrlBooking extends CtrlInit implements ActionListener {
 
+    /**
+     * Instancia el objeto JDialog - BookingDialog. Le envia el formulario
+     * "padre"
+     */
     private final BookingDialog bookingWindow = new BookingDialog(appInit, true);
 
-    private BookingsArrayList publicBookingList;
+    //private BookingsArrayList publicBookingList;
 
     public CtrlBooking() {
         /* Listener para opciones de menú */
@@ -48,7 +52,7 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
      * Sobreescribe el método actionPerformed con el código que interesa para el
      * JDialog donde se piden datos para realizar la reserva, de la clase padre
      * CtrlInit de la que hereda, que a su vez sobreescribe el método de la
-     * clase abstracta que implementa
+     * clase abstracta ActionListener que implementa
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -65,14 +69,8 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
 
             //Llama al método que se encarga de realizar la operación
             op.saveBooking(bookingWindow, publicBookingList);
-
-            //Cierro el modal
-            this.bookingWindow.setVisible(false);
-
-//            System.out.println("\nDESPUÉS DE GUARDAR LA RESERVA\n");
-//            for (int i = 0; i < publicBookingList.bookingCount(); i++) {
-//                System.out.println(publicBookingList.getBooking(i));
-//            }
+            //Cierra el modal
+            //this.bookingWindow.setVisible(false);
         }
         if (e.getSource() == bookingWindow.navItemBookingList) {
             //Crea una instancia del controller CtrflBookingList

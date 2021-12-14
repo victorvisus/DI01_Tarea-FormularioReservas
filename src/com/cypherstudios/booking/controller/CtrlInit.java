@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 public class CtrlInit implements ActionListener {
 
     //Inicializa un atributo con el ArrayList
-    private BookingsArrayList publicBookingList = new BookingsArrayList();
+    protected BookingsArrayList publicBookingList = new BookingsArrayList();
 
     //Instancia un Objeto de la clase que gestiona los datos
     protected final BookingDAO op = new BookingDAO();

@@ -17,9 +17,12 @@ import java.util.Date;
  */
 public class CtrlBookingList extends CtrlInit {
 
+    /**
+     * Instancia el objeto JDialog - BookingList. Le envia el formulario "padre"
+     */
     private final BookingList bookingListWindows = new BookingList(appInit, true);
 
-    private BookingsArrayList publicBookingList;
+    //private BookingsArrayList publicBookingList;
 
     public CtrlBookingList() {
         /* Listener para opciones de menú */
@@ -60,8 +63,7 @@ public class CtrlBookingList extends CtrlInit {
         /* Botón listar las Reservas */
         if (e.getSource() == bookingListWindows.btnBookingList) {
 
-            addExamples(); //Creo objetos de ejemplo
-
+            //addExamples(); //Creo objetos de ejemplo
             op.tableBookinList(bookingListWindows.jtBookingList, publicBookingList);
         }
     }

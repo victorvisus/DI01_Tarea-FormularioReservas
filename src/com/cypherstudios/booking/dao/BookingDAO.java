@@ -27,13 +27,18 @@ public class BookingDAO {
      * Guarda en el ArrayList la reserva, que manda a gestionar al método
      * actionBtnSaveBooking
      *
-     * @param bookingWindow
-     * @param publicBookingList
-     * @return
+     * @param bookingWindow : recibe la ventana JDialog que contiene los datos
+     * necesarios para la reserva
+     * @param publicBookingList : recibe el ArrayList con las reservas que se
+     * han realizado
+     * @return : devuelve el arraylist modificado
      */
     public BookingsArrayList saveBooking(BookingDialog bookingWindow, BookingsArrayList publicBookingList) {
         try {
             publicBookingList.attach(actionBtnSaveBooking(bookingWindow));
+
+            //Cierra el modal si la reserva se ha realizado correctamente
+            bookingWindow.setVisible(false);
 
         } catch (BookingExceptions ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),
@@ -62,29 +67,27 @@ public class BookingDAO {
 
         Booking reservation = null;
 
-        //Manda a evaluar que los combo box haya una opción correcta
+        //Manda a evaluar que los combo box (Tipo de evento y Tipo de cocina) haya una opción correcta seleccionada
         dataEvaluate(bookingWindow.cbEventType, (String) bookingWindow.cbEventType.getSelectedItem());
         dataEvaluate(bookingWindow.cbTypeCuisine, (String) bookingWindow.cbTypeCuisine.getSelectedItem());
 
-        //Manda a comprobar que el tipo de reserva sea "Congreso"
         if (dataEvaluate(bookingWindow.cbEventType, "Congreso")) {
             reservation = new Meeting();
 
-            reservation.setCustomerName(bookingWindow.txtCustomerName.getText());
-            reservation.setReservation((Date) bookingWindow.dateReservation.getValue());
-            reservation.setAttendees((int) bookingWindow.spAttendees.getValue());
-            reservation.setTypeCuisine((String) bookingWindow.cbTypeCuisine.getSelectedItem());
+            //Pone los valores a los atributos heredados del objeto Booking
+            buildStandardBooking(bookingWindow, reservation);
 
             if (reservation instanceof Meeting) {
                 ((Meeting) reservation).setJourneys((int) bookingWindow.spJourneys.getValue());
 
                 if (bookingWindow.rbtnHostingYes.isSelected() && !bookingWindow.rbtnHostingNo.isSelected()) {
+                    //Estable el valor de 'Y' al atributo
                     ((Meeting) reservation).setHosting('Y');
                     //Recojo los valores para los datos de HostingRoom
-
                     int numDays = (int) bookingWindow.numDays.getValue();
                     int numRooms = (int) bookingWindow.numRooms.getValue();
 
+                    //Le mando los valores al método de objeto Meeting, que construye el "atributo/objeto" HostingRoom
                     ((Meeting) reservation).roomsValues(numDays, numRooms);
 
                 } else if (bookingWindow.rbtnHostingNo.isSelected() && !bookingWindow.rbtnHostingYes.isSelected()) {
@@ -92,7 +95,6 @@ public class BookingDAO {
                 } else {
                     throw new BookingExceptions(4);
                 }
-
             }
 
             JOptionPane.showMessageDialog(null, "Reserva registrado correctamente",
@@ -104,10 +106,8 @@ public class BookingDAO {
         } else if (dataEvaluate(bookingWindow.cbEventType, "Banquete")) {
             reservation = new Banquet();
 
-            reservation.setCustomerName(bookingWindow.txtCustomerName.getText());
-            reservation.setReservation((Date) bookingWindow.dateReservation.getValue());
-            reservation.setAttendees((int) bookingWindow.spAttendees.getValue());
-            reservation.setTypeCuisine((String) bookingWindow.cbTypeCuisine.getSelectedItem());
+            //Pone los valores a los atributos heredados del objeto Booking
+            buildStandardBooking(bookingWindow, reservation);
 
             JOptionPane.showMessageDialog(null, "Reserva registrado correctamente",
                     "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
@@ -118,19 +118,35 @@ public class BookingDAO {
         } else if (dataEvaluate(bookingWindow.cbEventType, "Jornada")) {
             reservation = new Workshop();
 
-            reservation.setCustomerName(bookingWindow.txtCustomerName.getText());
-            reservation.setReservation((Date) bookingWindow.dateReservation.getValue());
-            reservation.setAttendees((int) bookingWindow.spAttendees.getValue());
-            reservation.setTypeCuisine((String) bookingWindow.cbTypeCuisine.getSelectedItem());
+            //Pone los valores a los atributos heredados del objeto Booking
+            buildStandardBooking(bookingWindow, reservation);
 
             JOptionPane.showMessageDialog(null, "Reserva registrado correctamente",
                     "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
 
             //Establece valores por defecto en el formulario
             cleanForm(bookingWindow);
+
         } else {
             throw new BookingExceptions(2);
         }
+
+        return reservation;
+    }
+
+    /**
+     * Construye el objeto Booking "estandar", el que corresponda a Workshop y a
+     * Banquet
+     *
+     * @param bookingWindow
+     * @param reservation
+     * @return
+     */
+    private Booking buildStandardBooking(BookingDialog bookingWindow, Booking reservation) {
+        reservation.setCustomerName(bookingWindow.txtCustomerName.getText());
+        reservation.setReservation((Date) bookingWindow.dateReservation.getValue());
+        reservation.setAttendees((int) bookingWindow.spAttendees.getValue());
+        reservation.setTypeCuisine((String) bookingWindow.cbTypeCuisine.getSelectedItem());
 
         return reservation;
     }
@@ -235,9 +251,16 @@ public class BookingDAO {
             case 3:
                 bookingTable.setValueAt(((Meeting) getBooking).getEventType(), x, 0);
 
-                bookingTable.setValueAt(((Meeting) getBooking).getJourneys(), x, 5);
-                bookingTable.setValueAt(((Meeting) getBooking).getHostingRoom().getNumRooms(), x, 6);
-                bookingTable.setValueAt(((Meeting) getBooking).getHostingRoom().getNumDays(), x, 7);
+                //Evalua si se necesitan habitaciones de hotel.
+                if (((Meeting) getBooking).getHosting() == 'Y') {
+                    bookingTable.setValueAt(((Meeting) getBooking).getJourneys(), x, 5);
+                    bookingTable.setValueAt(((Meeting) getBooking).getHostingRoom().getNumRooms(), x, 6);
+                    bookingTable.setValueAt(((Meeting) getBooking).getHostingRoom().getNumDays(), x, 7);
+                } else {
+                    bookingTable.setValueAt(((Meeting) getBooking).getJourneys(), x, 5);
+                    bookingTable.setValueAt(0, x, 6);
+                    bookingTable.setValueAt(0, x, 7);
+                }
                 break;
             default:
                 //throw new BookingExceptions(7);
@@ -250,6 +273,28 @@ public class BookingDAO {
     }
 
     /* *************************************************** COMPROBACIONES **** */
+    /**
+     *
+     *
+     * @param cb : el componente JComboBox
+     * @param evType : String que contiene la cadena válida
+     */
+    private int dataEvaluateOption(JComboBox cb) throws BookingExceptions {
+        String tipo = (String) cb.getSelectedItem();
+        int op;
+
+        if (tipo.equals("Congreso")) {
+            op = 1;
+        } else if (tipo.equals("Banquete")) {
+            op = 2;
+        } else if (tipo.equals("Jornada")) {
+            op = 3;
+        } else {
+            throw new BookingExceptions(6);
+        }
+        return 0;
+    }
+
     /**
      * Evalua si el item seleccionado en un JComboBox coincide con el enviado
      * por parámetro
