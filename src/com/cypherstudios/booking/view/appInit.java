@@ -12,7 +12,7 @@ import javax.swing.*;
  *
  * @author Victor
  */
-public class appIni extends javax.swing.JFrame {
+public class AppInit extends javax.swing.JFrame {
 
     //Variables para el falso boton X cerrar
     int xMouse, yMouse;
@@ -28,7 +28,7 @@ public class appIni extends javax.swing.JFrame {
     /**
      * Creates new form appIni
      */
-    public appIni() {
+    public AppInit() {
         //Llama al método para establecer la imagen de fondo para el JPane
         //this.setContentPane(bg);
 
@@ -348,20 +348,20 @@ public class appIni extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(appIni.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(AppInit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(appIni.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(AppInit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(appIni.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(AppInit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(appIni.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(AppInit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new appIni().setVisible(true);
+//                new AppInit().setVisible(true);
 //            }
 //        });
 //    }

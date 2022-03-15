@@ -46,7 +46,7 @@ public class BookingExceptions extends Exception {
                 break;
             case 3:
                 //No se ha seleccionado una opción en el JComboBox
-                errorMsg = "Por favor, elije un tipo de evento y de cocina";
+                errorMsg = "Por favor, tienes que elejir un tipo de evento y de cocina";
                 break;
             case 4:
                 //No se ha seleccionado una opción en el JComboBox
@@ -63,6 +63,10 @@ public class BookingExceptions extends Exception {
             case 7:
                 //El objeto reserva no coincide con ningún tipo de reserva establecido
                 errorMsg = "Error al listar la reserva";
+                break;
+            case 8:
+                //El objeto reserva no coincide con ningún tipo de reserva establecido
+                errorMsg = "Error al establecer la reserva de habitaciones";
                 break;
             default:
                 //Cualquier otro error no establecido en este switch

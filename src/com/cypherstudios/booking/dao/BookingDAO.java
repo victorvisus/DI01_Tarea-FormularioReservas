@@ -14,12 +14,12 @@ import javax.swing.table.DefaultTableModel;
 public class BookingDAO {
 
     /**
-     * Constructor
+     * Constructor Vacio
      */
     public BookingDAO() {
     }
 
-    /**
+    /*
      * ********************************************** GUARDAR RESERVAS
      * *************************************************************************
      */
@@ -68,15 +68,19 @@ public class BookingDAO {
         Booking reservation = null;
 
         //Manda a evaluar que los combo box (Tipo de evento y Tipo de cocina) haya una opción correcta seleccionada
-        dataEvaluate(bookingWindow.cbEventType, (String) bookingWindow.cbEventType.getSelectedItem());
+//        dataEvaluate(bookingWindow.cbEventType, (String) bookingWindow.cbEventType.getSelectedItem());
         dataEvaluate(bookingWindow.cbTypeCuisine, (String) bookingWindow.cbTypeCuisine.getSelectedItem());
 
+        /*
+        Hacer un switch para este código, usando el método dataEvaluateOption para seleccionar la opción.
+         */
         if (dataEvaluate(bookingWindow.cbEventType, "Congreso")) {
             reservation = new Meeting();
 
-            //Pone los valores a los atributos heredados del objeto Booking
+            //Pone los valores a los atributos heredados estandar del objeto Booking
             buildStandardBooking(bookingWindow, reservation);
 
+            //Casteo el objeto para establecer los valores caracteristicos del propio objeto
             if (reservation instanceof Meeting) {
                 ((Meeting) reservation).setJourneys((int) bookingWindow.spJourneys.getValue());
 
@@ -90,15 +94,22 @@ public class BookingDAO {
                     //Le mando los valores al método de objeto Meeting, que construye el "atributo/objeto" HostingRoom
                     ((Meeting) reservation).roomsValues(numDays, numRooms);
 
+                    JOptionPane.showMessageDialog(null, "Reserva registrado correctamente",
+                            "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
+
                 } else if (bookingWindow.rbtnHostingNo.isSelected() && !bookingWindow.rbtnHostingYes.isSelected()) {
                     ((Meeting) reservation).setHosting('N');
+
+                    JOptionPane.showMessageDialog(null, "Reserva registrado correctamente",
+                            "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
+
                 } else {
                     throw new BookingExceptions(4);
                 }
             }
 
-            JOptionPane.showMessageDialog(null, "Reserva registrado correctamente",
-                    "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
+//            JOptionPane.showMessageDialog(null, "Reserva registrado correctamente",
+//                    "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
 
             //Establece valores por defecto en el formulario
             cleanForm(bookingWindow);
@@ -136,11 +147,11 @@ public class BookingDAO {
 
     /**
      * Construye el objeto Booking "estandar", el que corresponda a Workshop y a
-     * Banquet
+     * Banquet, para los otros tipos de Booking los completa dentro de su if
      *
      * @param bookingWindow
      * @param reservation
-     * @return
+     * @return reservation
      */
     private Booking buildStandardBooking(BookingDialog bookingWindow, Booking reservation) {
         reservation.setCustomerName(bookingWindow.txtCustomerName.getText());
@@ -151,7 +162,7 @@ public class BookingDAO {
         return reservation;
     }
 
-    /**
+    /*
      * ********************************************** LISTAR RESERVAS
      * *************************************************************************
      */
@@ -306,9 +317,10 @@ public class BookingDAO {
     private boolean dataEvaluate(JComboBox cb, String evType) throws BookingExceptions {
         String tipo = (String) cb.getSelectedItem();
 
-        if (tipo == "Elije una opción") {
+        if ("Elije una opción".equals(tipo)) {
             throw new BookingExceptions(3);
-        } else if (tipo == evType) {
+            //} else if (tipo == evType) {
+        } else if (evType.equals(tipo)) {
             return true;
         }
         return false;

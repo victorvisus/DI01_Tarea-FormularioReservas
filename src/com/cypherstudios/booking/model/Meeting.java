@@ -142,7 +142,7 @@ public class Meeting extends Booking {
             this.rooms = rooms;
         } catch (BookingExceptions ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),
-                    "Error al establecer la puntuación", JOptionPane.ERROR_MESSAGE);
+                    "Error al establecer la reserva de habitaciones", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

@@ -7,6 +7,8 @@ import java.util.Date;
  *
  * Clase Booking
  *
+ * Implementa la interface Comparable que permite ordenar un objeto
+ *
  * @author Victor
  */
 public abstract class Booking implements Comparable<Booking> {

@@ -17,33 +17,38 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
      * Instancia el objeto JDialog - BookingDialog. Le envia el formulario
      * "padre"
      */
-    private final BookingDialog bookingWindow = new BookingDialog(appInit, true);
+    private final BookingDialog bookingDialogWindow = new BookingDialog(appInit, true);
 
     //private BookingsArrayList publicBookingList;
 
     public CtrlBooking() {
         /* Listener para opciones de menú */
-        this.bookingWindow.navItemSaveBooking.addActionListener(this);
-        this.bookingWindow.navItemBookingList.addActionListener(this);
-        this.bookingWindow.navItemReturn.addActionListener(this);
-        this.bookingWindow.navItemExit.addActionListener(this);
+        this.bookingDialogWindow.navItemSaveBooking.addActionListener(this);
+        this.bookingDialogWindow.navItemBookingList.addActionListener(this);
+        this.bookingDialogWindow.navItemReturn.addActionListener(this);
+        this.bookingDialogWindow.navItemExit.addActionListener(this);
 
         /* Listener para botones */
-        this.bookingWindow.btnSaveBooking.addActionListener(this);
-        this.bookingWindow.btnReturn.addActionListener(this);
+        this.bookingDialogWindow.btnSaveBooking.addActionListener(this);
+        this.bookingDialogWindow.btnReturn.addActionListener(this);
     }
 
     /**
      * Lanza la ventana de dialogo
      *
+     * Instancia un objeto tipo BookingsArrayList asignandole el ArrayList
+     * recibido a su atributo de tipo ArrayList.
+     *
+     * Hace visible el JDialog
+     *
      * @param publicBookingList : recibe el ArrayList de reservas
-     * @return Array
+     * @return Array : Devuelve el ArrayList modificado
      */
     public BookingsArrayList runBooking(BookingsArrayList publicBookingList) {
 
         this.publicBookingList = publicBookingList;
 
-        bookingWindow.setVisible(true);
+        bookingDialogWindow.setVisible(true);
 
         return publicBookingList;
     }
@@ -57,23 +62,22 @@ public class CtrlBooking extends CtrlInit implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         /* Acciones para botones y opciones de menú */
-        if (e.getSource() == bookingWindow.navItemExit) {
+        if (e.getSource() == bookingDialogWindow.navItemExit) {
             //Cierra la aplicación
             System.exit(0);
         }
-        if (e.getSource() == bookingWindow.btnReturn || e.getSource() == bookingWindow.navItemReturn) {
-            //Cierra el JDialog y vuelve a al JFrame principal
-            this.bookingWindow.setVisible(false);
+        if (e.getSource() == bookingDialogWindow.btnReturn || e.getSource() == bookingDialogWindow.navItemReturn) {
+            //Cierra el JDialog y vuelve al JFrame principal
+            this.bookingDialogWindow.setVisible(false);
         }
-        if (e.getSource() == bookingWindow.btnSaveBooking || e.getSource() == bookingWindow.navItemSaveBooking) {
-
+        if (e.getSource() == bookingDialogWindow.btnSaveBooking || e.getSource() == bookingDialogWindow.navItemSaveBooking) {
             //Llama al método que se encarga de realizar la operación
-            op.saveBooking(bookingWindow, publicBookingList);
+            op.saveBooking(bookingDialogWindow, publicBookingList);
             //Cierra el modal
-            //this.bookingWindow.setVisible(false);
+            //this.bookingDialogWindow.setVisible(false);
         }
-        if (e.getSource() == bookingWindow.navItemBookingList) {
-            //Crea una instancia del controller CtrflBookingList
+        if (e.getSource() == bookingDialogWindow.navItemBookingList) {
+            //Crea una instancia del controller CtrflBookingList - Sin cerrar la ventana de Reservas
             CtrlBookingList openList = new CtrlBookingList();
             //Iniciar el JDialog BookingList
             openList.runListWindow(publicBookingList);

@@ -2,7 +2,7 @@ package com.cypherstudios.booking.controller;
 
 import com.cypherstudios.booking.dao.BookingDAO;
 import com.cypherstudios.booking.dao.BookingsArrayList;
-import com.cypherstudios.booking.view.appIni;
+import com.cypherstudios.booking.view.AppInit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,7 +19,7 @@ public class CtrlInit implements ActionListener {
     protected final BookingDAO op = new BookingDAO();
 
     //Instancia la vista JFrame, del panel principal de la app
-    protected final appIni appInit = new appIni();
+    protected final AppInit appInit = new AppInit();
 
     /**
      * Constructor en el que se inician las "escuchas" a los botones del panel
@@ -27,9 +27,9 @@ public class CtrlInit implements ActionListener {
     public CtrlInit() {
 
         /* Listener para opciones de menú */
-        //this.appInit.navItemBooking.addActionListener(this);
-        //this.appInit.navItemBookingList.addActionListener(this);
-        //this.appInit.navItemExit.addActionListener(this);
+        //this.AppInit.navItemBooking.addActionListener(this);
+        //this.AppInit.navItemBookingList.addActionListener(this);
+        //this.AppInit.navItemExit.addActionListener(this);
 
         /* Listener para botones */
         this.appInit.btnBooking.addActionListener(this);
@@ -65,14 +65,14 @@ public class CtrlInit implements ActionListener {
         if (e.getSource() == appInit.btnBooking) {
             //Crea una instancia del controller del JDialog de reservas: CtrlBooking
             CtrlBooking openBooking = new CtrlBooking();
-            //Lanza el JDialog
+            //Lanza el JDialog - le envia el ArrayList
             openBooking.runBooking(publicBookingList);
         }
         // Abre el panel donde se listan las reservas "guardadas"
         if (e.getSource() == appInit.btnBookingList) {
             //Crea una instancia del controller CtrflBookingList
             CtrlBookingList openList = new CtrlBookingList();
-            //Inicia el JDialog BookingList
+            //Inicia el JDialog BookingList - le envia el ArrayList
             openList.runListWindow(publicBookingList);
         }
     }
