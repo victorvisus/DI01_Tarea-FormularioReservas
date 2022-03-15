@@ -64,7 +64,7 @@ public class CtrlBookingList extends CtrlInit {
         if (e.getSource() == bookingListWindows.btnBookingList) {
 
             //addExamples(); //Creo objetos de ejemplo
-            op.tableBookinList(bookingListWindows.jtBookingList, publicBookingList);
+            op.tableBookingList(bookingListWindows.jtBookingList, publicBookingList);
         }
     }
 

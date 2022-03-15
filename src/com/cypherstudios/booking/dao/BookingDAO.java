@@ -110,7 +110,6 @@ public class BookingDAO {
 
 //            JOptionPane.showMessageDialog(null, "Reserva registrado correctamente",
 //                    "Reserva de evento", JOptionPane.INFORMATION_MESSAGE);
-
             //Establece valores por defecto en el formulario
             cleanForm(bookingWindow);
 
@@ -166,7 +165,7 @@ public class BookingDAO {
      * ********************************************** LISTAR RESERVAS
      * *************************************************************************
      */
-    public void tableBookinList(JTable jtBookingList, BookingsArrayList publicBookingList) {
+    public void tableBookingList(JTable jtBookingList, BookingsArrayList publicBookingList) {
 
         DefaultTableModel bookingTable = new DefaultTableModel();
         jtBookingList.setModel(bookingTable);
@@ -184,19 +183,22 @@ public class BookingDAO {
             bookingTable.addColumn("Nº Habitaciones");//6
             bookingTable.addColumn("Nº de Noches");//7
 
+            //Coje el num. de columnas que tiene el jtable
             int numColumns = bookingTable.getColumnCount();
+            //Asigna un ancho a las columnas
             for (int y = 0; y < numColumns; y++) {
                 jtBookingList.getColumnModel().getColumn(y).setPreferredWidth(20);
             }
 
             Object[] fila = new Object[numColumns];
 
+            //Crea tantas filas como objetos hay en el ArrayList
             for (int x = 0; x < publicBookingList.bookingCount(); x++) {
 
                 //Agregamos al modelo una fila
                 bookingTable.addRow(fila);
 
-                /* Instancia el objeto Booking del que va a extraer los datos
+                /* Instancia un objeto Booking del que va a extraer los datos
                 para mostrarlos en las columnas de la fila, en la tabla */
                 Booking getBooking = (Booking) publicBookingList.getBooking(x);
 
@@ -276,6 +278,7 @@ public class BookingDAO {
             default:
                 //throw new BookingExceptions(7);
 
+                // Si se produce un error, rellena los campos de la fila con el string "error"
                 for (int z = 0; z < bookingTable.getColumnCount(); z++) {
                     bookingTable.setValueAt("error", x, z);
                 }
@@ -284,28 +287,6 @@ public class BookingDAO {
     }
 
     /* *************************************************** COMPROBACIONES **** */
-    /**
-     *
-     *
-     * @param cb : el componente JComboBox
-     * @param evType : String que contiene la cadena válida
-     */
-    private int dataEvaluateOption(JComboBox cb) throws BookingExceptions {
-        String tipo = (String) cb.getSelectedItem();
-        int op;
-
-        if (tipo.equals("Congreso")) {
-            op = 1;
-        } else if (tipo.equals("Banquete")) {
-            op = 2;
-        } else if (tipo.equals("Jornada")) {
-            op = 3;
-        } else {
-            throw new BookingExceptions(6);
-        }
-        return 0;
-    }
-
     /**
      * Evalua si el item seleccionado en un JComboBox coincide con el enviado
      * por parámetro
@@ -357,8 +338,33 @@ public class BookingDAO {
     }
 
     /**
-     * Evalua el tipo de evento, dependiendo de si es Banquete, Jornada o
-     * Congreso devuelve un valor u otro, para el switch
+     * Evalua la selección del JComboBox
+     *
+     * @param cb : el componente JComboBox
+     * @param evType : String que contiene la cadena válida
+     */
+    private int dataEvaluateOption(JComboBox cb) throws BookingExceptions {
+        String tipo = (String) cb.getSelectedItem();
+//        int op;
+
+        if (tipo.equals("Congreso")) {
+            return 1;
+//            op = 1;
+        } else if (tipo.equals("Banquete")) {
+            return 2;
+//            op = 2;
+        } else if (tipo.equals("Jornada")) {
+            return 3;
+//            op = 3;
+        } else {
+            throw new BookingExceptions(6);
+        }
+        //return op;
+    }
+
+    /**
+     * Evalua el tipo de objeto del evento, dependiendo de si es Banquete,
+     * Jornada o Congreso devuelve un valor u otro, para el switch
      *
      * @param getBooking : Objeto reserva Booking
      * @return valor case
